@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/animated_custom_dialog.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/my_dialog.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_textfield.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/utils.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/basewidgets.dart';
 import 'package:provider/provider.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {

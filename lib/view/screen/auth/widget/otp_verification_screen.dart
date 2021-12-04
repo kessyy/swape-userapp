@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
@@ -43,14 +42,15 @@ class VerificationScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: Center(
                             child: Text(
-                              email==null?
-                              '${getTranslated('please_enter_4_digit_code', context)}\n$mobileNumber':
-                              '${getTranslated('please_enter_4_digit_code', context)}\n$email',
-                              textAlign: TextAlign.center,
-                            )),
+                          email == null
+                              ? '${getTranslated('please_enter_4_digit_code', context)}\n$mobileNumber'
+                              : '${getTranslated('please_enter_4_digit_code', context)}\n$email',
+                          textAlign: TextAlign.center,
+                        )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 39, vertical: 35),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 39, vertical: 35),
                         child: PinCodeTextField(
                           length: 4,
                           appContext: context,
@@ -66,10 +66,12 @@ class VerificationScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             selectedColor: ColorResources.colorMap[200],
                             selectedFillColor: Colors.white,
-                            inactiveFillColor: ColorResources.getSearchBg(context),
+                            inactiveFillColor:
+                                ColorResources.getSearchBg(context),
                             inactiveColor: ColorResources.colorMap[200],
                             activeColor: ColorResources.colorMap[400],
-                            activeFillColor: ColorResources.getSearchBg(context),
+                            activeFillColor:
+                                ColorResources.getSearchBg(context),
                           ),
                           animationDuration: Duration(milliseconds: 300),
                           backgroundColor: Colors.transparent,
@@ -80,74 +82,111 @@ class VerificationScreen extends StatelessWidget {
                           },
                         ),
                       ),
-
                       Center(
-                          child: Text(getTranslated('i_didnt_receive_the_code', context),)),
+                          child: Text(
+                        getTranslated('i_didnt_receive_the_code', context),
+                      )),
                       Center(
                         child: InkWell(
                           onTap: () {
-                            Provider.of<AuthProvider>(context, listen: false).checkPhone(mobileNumber,tempToken).then((value) {
+                            Provider.of<AuthProvider>(context, listen: false)
+                                .checkPhone(mobileNumber, tempToken)
+                                .then((value) {
                               if (value.isSuccess) {
-                                showCustomSnackBar('Resent code successful', context, isError: false);
+                                showCustomSnackBar(
+                                    'Resent code successful', context,
+                                    isError: false);
                               } else {
                                 showCustomSnackBar(value.message, context);
                               }
                             });
-
                           },
                           child: Padding(
-                            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            padding: EdgeInsets.all(
+                                Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: Text(
                               getTranslated('resend_code', context),
-
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 48),
-                      authProvider.isEnableVerificationCode ? !authProvider.isPhoneNumberVerificationButtonLoading ?
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
-                        child: CustomButton(
-                          buttonText: getTranslated('verify', context),
-                          onTap: () {
-                            if(Provider.of<SplashProvider>(context,listen: false).configModel.phoneVerification){
-
-                              Provider.of<AuthProvider>(context, listen: false).verifyPhone(mobileNumber,tempToken).then((value) {
-                                if(value.isSuccess) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(getTranslated('sign_up_successfully_now_login', context)),backgroundColor: Colors.green,)
-                                  );
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => AuthScreen(initialPage: 0)), (route) => false);
-                                }else {
-                                  print(value.message);
-                                  showCustomSnackBar(value.message, context);
-                                }
-                              });
-                            }else{
-                              Provider.of<AuthProvider>(context, listen: false).verifyEmail(email,tempToken).then((value) {
-                                if(value.isSuccess) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(getTranslated('sign_up_successfully_now_login', context)),backgroundColor: Colors.green,)
-                                  );
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => AuthScreen(initialPage: 0)), (route) => false);
-                                }else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(value.message),backgroundColor: Colors.red)
-                                  );
-                                }
-                              });
-                            }
-
-
-
-
-                          },
-                        ),
-                      ):  Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)))
+                      authProvider.isEnableVerificationCode
+                          ? !authProvider.isPhoneNumberVerificationButtonLoading
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_LARGE),
+                                  child: CustomButton(
+                                    buttonText:
+                                        getTranslated('verify', context),
+                                    onTap: () {
+                                      if (Provider.of<SplashProvider>(context,
+                                              listen: false)
+                                          .configModel
+                                          .phoneVerification) {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .verifyPhone(
+                                                mobileNumber, tempToken)
+                                            .then((value) {
+                                          if (value.isSuccess) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(getTranslated(
+                                                  'sign_up_successfully_now_login',
+                                                  context)),
+                                              backgroundColor: Colors.green,
+                                            ));
+                                            Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => AuthScreen(
+                                                        initialPage: 0)),
+                                                (route) => false);
+                                          } else {
+                                            print(value.message);
+                                            showCustomSnackBar(
+                                                value.message, context);
+                                          }
+                                        });
+                                      } else {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .verifyEmail(email, tempToken)
+                                            .then((value) {
+                                          if (value.isSuccess) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(getTranslated(
+                                                  'sign_up_successfully_now_login',
+                                                  context)),
+                                              backgroundColor: Colors.green,
+                                            ));
+                                            Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => AuthScreen(
+                                                        initialPage: 0)),
+                                                (route) => false);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content:
+                                                        Text(value.message),
+                                                    backgroundColor:
+                                                        Colors.red));
+                                          }
+                                        });
+                                      }
+                                    },
+                                  ),
+                                )
+                              : Center(
+                                  child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Theme.of(context).primaryColor)))
                           : SizedBox.shrink()
-
-
                     ],
                   ),
                 ),

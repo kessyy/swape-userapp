@@ -1,11 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/cart_model.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/price_converter.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -16,7 +13,11 @@ class CartWidget extends StatelessWidget {
   final CartModel cartModel;
   final int index;
   final bool fromCheckout;
-  const CartWidget({Key key, this.cartModel, @required this.index, @required this.fromCheckout});
+  const CartWidget(
+      {Key key,
+      this.cartModel,
+      @required this.index,
+      @required this.fromCheckout});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,6 @@ class CartWidget extends StatelessWidget {
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       decoration: BoxDecoration(color: Theme.of(context).highlightColor),
       child: Row(children: [
-
         /*
 
         !fromCheckout ? InkWell(
@@ -47,79 +47,115 @@ class CartWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
           child: FadeInImage.assetNetwork(
-            placeholder: Images.placeholder, height: 50, width: 50,
-            image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.productThumbnailUrl}/${cartModel.thumbnail}',
-            imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, height: 50, width: 50),
+            placeholder: Images.placeholder,
+            height: 50,
+            width: 50,
+            image:
+                '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productThumbnailUrl}/${cartModel.thumbnail}',
+            imageErrorBuilder: (c, o, s) =>
+                Image.asset(Images.placeholder, height: 50, width: 50),
           ),
         ),
-
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
+            padding:
+                EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(cartModel.name, maxLines: 2, overflow: TextOverflow.ellipsis, style: titilliumBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_SMALL,
-                    color: ColorResources.getHint(context),
-                  )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        PriceConverter.convertPrice(context, cartModel.price),
-                        style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context)),
-                      ),
-                      cartModel.discount > 0 ?
-                      Container(
-                        width: 80,
-                        padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ColorResources.getPrimary(context)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            PriceConverter.percentageCalculation(context, cartModel.price, cartModel.discount, 'amount'),
-                            textAlign: TextAlign.center,
-                            style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL, color: ColorResources.getHint(context)),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(cartModel.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: titilliumBold.copyWith(
+                      fontSize: Dimensions.FONT_SIZE_SMALL,
+                      color: ColorResources.getHint(context),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      PriceConverter.convertPrice(context, cartModel.price),
+                      style: titilliumSemiBold.copyWith(
+                          color: ColorResources.getPrimary(context)),
+                    ),
+                    cartModel.discount > 0
+                        ? Container(
+                            width: 80,
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: ColorResources.getPrimary(context)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                PriceConverter.percentageCalculation(
+                                    context,
+                                    cartModel.price,
+                                    cartModel.discount,
+                                    'amount'),
+                                textAlign: TextAlign.center,
+                                style: titilliumRegular.copyWith(
+                                    fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                                    color: ColorResources.getHint(context)),
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
+                  ],
+                ),
+                Provider.of<AuthProvider>(context, listen: false).isLoggedIn()
+                    ? Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: Dimensions.PADDING_SIZE_SMALL),
+                            child: QuantityButton(
+                                isIncrement: false,
+                                index: index,
+                                quantity: cartModel.quantity,
+                                maxQty: 20,
+                                cartModel: cartModel),
                           ),
-                        ),
-                      ) : SizedBox(),
-                    ],
-                  ),
-                  Provider.of<AuthProvider>(context, listen: false).isLoggedIn() ? Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_SMALL),
-                        child: QuantityButton(isIncrement: false, index: index, quantity: cartModel.quantity,maxQty: 20,cartModel: cartModel),
-                      ),
-                      Text(cartModel.quantity.toString(), style: titilliumSemiBold),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                        child: QuantityButton(index: index, isIncrement: true, quantity: cartModel.quantity, maxQty: 20, cartModel: cartModel),
-                      ),
-                    ],
-                  ) : SizedBox.shrink(),
-                ],
-              ),
+                          Text(cartModel.quantity.toString(),
+                              style: titilliumSemiBold),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_SMALL),
+                            child: QuantityButton(
+                                index: index,
+                                isIncrement: true,
+                                quantity: cartModel.quantity,
+                                maxQty: 20,
+                                cartModel: cartModel),
+                          ),
+                        ],
+                      )
+                    : SizedBox.shrink(),
+              ],
+            ),
           ),
         ),
-
-        !fromCheckout ? IconButton(
-          onPressed: () {
-            if(Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-              Provider.of<CartProvider>(context, listen: false).removeFromCartAPI(context,cartModel.id);
-            }else {
-              Provider.of<CartProvider>(context, listen: false).removeFromCart(index);
-            }
-          },
-          icon: Icon(Icons.cancel, color: ColorResources.RED),
-        ) : SizedBox.shrink(),
-
+        !fromCheckout
+            ? IconButton(
+                onPressed: () {
+                  if (Provider.of<AuthProvider>(context, listen: false)
+                      .isLoggedIn()) {
+                    Provider.of<CartProvider>(context, listen: false)
+                        .removeFromCartAPI(context, cartModel.id);
+                  } else {
+                    Provider.of<CartProvider>(context, listen: false)
+                        .removeFromCart(index);
+                  }
+                },
+                icon: Icon(Icons.cancel, color: ColorResources.RED),
+              )
+            : SizedBox.shrink(),
       ]),
     );
   }
@@ -131,7 +167,12 @@ class QuantityButton extends StatelessWidget {
   final int quantity;
   final int index;
   final int maxQty;
-  QuantityButton({@required this.isIncrement, @required this.quantity, @required this.index, @required this.maxQty,@required this.cartModel});
+  QuantityButton(
+      {@required this.isIncrement,
+      @required this.quantity,
+      @required this.index,
+      @required this.maxQty,
+      @required this.cartModel});
 
   @override
   Widget build(BuildContext context) {
@@ -139,16 +180,24 @@ class QuantityButton extends StatelessWidget {
       onTap: () {
         if (!isIncrement && quantity > 1) {
           // Provider.of<CartProvider>(context, listen: false).setQuantity(false, index);
-          Provider.of<CartProvider>(context, listen: false).updateCartProductQuantity(cartModel.id,cartModel.quantity-1, context).then((value) {
+          Provider.of<CartProvider>(context, listen: false)
+              .updateCartProductQuantity(
+                  cartModel.id, cartModel.quantity - 1, context)
+              .then((value) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(value.message), backgroundColor: value.isSuccess ? Colors.green : Colors.red,
+              content: Text(value.message),
+              backgroundColor: value.isSuccess ? Colors.green : Colors.red,
             ));
           });
         } else if (isIncrement && quantity < maxQty) {
           // Provider.of<CartProvider>(context, listen: false).setQuantity(true, index);
-          Provider.of<CartProvider>(context, listen: false).updateCartProductQuantity(cartModel.id, cartModel.quantity+1, context).then((value) {
+          Provider.of<CartProvider>(context, listen: false)
+              .updateCartProductQuantity(
+                  cartModel.id, cartModel.quantity + 1, context)
+              .then((value) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(value.message), backgroundColor: value.isSuccess ? Colors.green : Colors.red,
+              content: Text(value.message),
+              backgroundColor: value.isSuccess ? Colors.green : Colors.red,
             ));
           });
         }
@@ -156,14 +205,14 @@ class QuantityButton extends StatelessWidget {
       child: Icon(
         isIncrement ? Icons.add_circle : Icons.remove_circle,
         color: isIncrement
-            ? quantity >= maxQty ? ColorResources.getGrey(context)
-            : ColorResources.getPrimary(context)
+            ? quantity >= maxQty
+                ? ColorResources.getGrey(context)
+                : ColorResources.getPrimary(context)
             : quantity > 1
-            ? ColorResources.getPrimary(context)
-            : ColorResources.getGrey(context),
+                ? ColorResources.getPrimary(context)
+                : ColorResources.getGrey(context),
         size: 20,
       ),
     );
   }
 }
-

@@ -3,16 +3,9 @@ import 'package:flutter_sixvalley_ecommerce/data/model/response/seller_model.dar
 import 'package:flutter_sixvalley_ecommerce/helper/date_converter.dart';
 
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/no_internet_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/not_loggedin_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/utils.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/basewidgets.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/chat/chat_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';

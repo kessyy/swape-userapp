@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/email_checker.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -43,7 +41,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   RegisterModel register = RegisterModel();
   bool isEmailVerified = false;
 
-
   addUser() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
@@ -53,7 +50,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       String _lastName = _lastNameController.text.trim();
       String _email = _emailController.text.trim();
       String _phone = _phoneController.text.trim();
-      String _phoneNumber = _countryDialCode+_phoneController.text.trim();
+      String _phoneNumber = _countryDialCode + _phoneController.text.trim();
       String _password = _passwordController.text.trim();
       String _confirmPassword = _confirmPasswordController.text.trim();
 
@@ -62,7 +59,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           content: Text(getTranslated('first_name_field_is_required', context)),
           backgroundColor: Colors.red,
         ));
-      }else if (_lastName.isEmpty) {
+      } else if (_lastName.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(getTranslated('last_name_field_is_required', context)),
           backgroundColor: Colors.red,
@@ -72,7 +69,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           content: Text(getTranslated('EMAIL_MUST_BE_REQUIRED', context)),
           backgroundColor: Colors.red,
         ));
-      }else if (EmailChecker.isNotValid(_email)) {
+      } else if (EmailChecker.isNotValid(_email)) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(getTranslated('enter_valid_email_address', context)),
           backgroundColor: Colors.red,
@@ -89,7 +86,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         ));
       } else if (_confirmPassword.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(getTranslated('CONFIRM_PASSWORD_MUST_BE_REQUIRED', context)),
+          content:
+              Text(getTranslated('CONFIRM_PASSWORD_MUST_BE_REQUIRED', context)),
           backgroundColor: Colors.red,
         ));
       } else if (_password != _confirmPassword) {
@@ -103,46 +101,68 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         register.email = _emailController.text;
         register.phone = _phoneNumber;
         register.password = _passwordController.text;
-        await Provider.of<AuthProvider>(context, listen: false).registration(register, route);
+        await Provider.of<AuthProvider>(context, listen: false)
+            .registration(register, route);
       }
     } else {
       isEmailVerified = false;
     }
   }
 
-  route(bool isRoute, String token, String tempToken, String errorMessage) async {
+  route(
+      bool isRoute, String token, String tempToken, String errorMessage) async {
     if (isRoute) {
-      if(Provider.of<SplashProvider>(context,listen: false).configModel.emailVerification){
-        Provider.of<AuthProvider>(context, listen: false).checkEmail(_emailController.text.toString(), tempToken).then((value) async {
-              if (value.isSuccess) {
-                Provider.of<AuthProvider>(context, listen: false).updateEmail(_emailController.text.toString());
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => VerificationScreen(tempToken,'',_emailController.text.toString())), (route) => false);
-
-              }
-            });
-          }else if(Provider.of<SplashProvider>(context,listen: false).configModel.phoneVerification){
-            Provider.of<AuthProvider>(context, listen: false).checkPhone(_phoneController.text.toString(),tempToken).then((value) async {
-              if (value.isSuccess) {
-                Provider.of<AuthProvider>(context, listen: false).updatePhone(_phoneController.text.toString());
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => VerificationScreen(tempToken,_phoneController.text.toString(),'')), (route) => false);
-
-              }
-            });
-          }else{
-            await Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()), (route) => false);
-            _emailController.clear();
-            _passwordController.clear();
-            _firstNameController.clear();
-            _lastNameController.clear();
-            _phoneController.clear();
-            _confirmPasswordController.clear();
+      if (Provider.of<SplashProvider>(context, listen: false)
+          .configModel
+          .emailVerification) {
+        Provider.of<AuthProvider>(context, listen: false)
+            .checkEmail(_emailController.text.toString(), tempToken)
+            .then((value) async {
+          if (value.isSuccess) {
+            Provider.of<AuthProvider>(context, listen: false)
+                .updateEmail(_emailController.text.toString());
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => VerificationScreen(
+                        tempToken, '', _emailController.text.toString())),
+                (route) => false);
           }
-
-
-    }
-    else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage), backgroundColor: Colors.red));
+        });
+      } else if (Provider.of<SplashProvider>(context, listen: false)
+          .configModel
+          .phoneVerification) {
+        Provider.of<AuthProvider>(context, listen: false)
+            .checkPhone(_phoneController.text.toString(), tempToken)
+            .then((value) async {
+          if (value.isSuccess) {
+            Provider.of<AuthProvider>(context, listen: false)
+                .updatePhone(_phoneController.text.toString());
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => VerificationScreen(
+                        tempToken, _phoneController.text.toString(), '')),
+                (route) => false);
+          }
+        });
+      } else {
+        await Provider.of<ProfileProvider>(context, listen: false)
+            .getUserInfo(context);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => DashBoardScreen()),
+            (route) => false);
+        _emailController.clear();
+        _passwordController.clear();
+        _firstNameController.clear();
+        _lastNameController.clear();
+        _phoneController.clear();
+        _confirmPasswordController.clear();
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage), backgroundColor: Colors.red));
     }
   }
 
@@ -150,16 +170,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   void initState() {
     super.initState();
-    Provider.of<SplashProvider>(context,listen: false).configModel;
+    Provider.of<SplashProvider>(context, listen: false).configModel;
     //_countryDialCode = CountryCode.fromCountryCode(Provider.of<SplashProvider>(context, listen: false).configModel.countryCode).dialCode;
-
 
     _formKey = GlobalKey<FormState>();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return ListView(
       padding: EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_SMALL),
       children: [
@@ -169,7 +187,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             children: [
               // for first and last name
               Container(
-                margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
+                margin: EdgeInsets.only(
+                    left: Dimensions.MARGIN_SIZE_DEFAULT,
+                    right: Dimensions.MARGIN_SIZE_DEFAULT),
                 child: Row(
                   children: [
                     Expanded(
@@ -197,7 +217,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
               // for email
               Container(
-                margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT, top: Dimensions.MARGIN_SIZE_SMALL),
+                margin: EdgeInsets.only(
+                    left: Dimensions.MARGIN_SIZE_DEFAULT,
+                    right: Dimensions.MARGIN_SIZE_DEFAULT,
+                    top: Dimensions.MARGIN_SIZE_SMALL),
                 child: CustomTextField(
                   hintText: getTranslated('ENTER_YOUR_EMAIL', context),
                   focusNode: _emailFocus,
@@ -210,7 +233,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               // for phone
 
               Container(
-                margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT, top: Dimensions.MARGIN_SIZE_SMALL),
+                margin: EdgeInsets.only(
+                    left: Dimensions.MARGIN_SIZE_DEFAULT,
+                    right: Dimensions.MARGIN_SIZE_DEFAULT,
+                    top: Dimensions.MARGIN_SIZE_SMALL),
                 child: Row(children: [
                   CodePickerWidget(
                     onChanged: (CountryCode countryCode) {
@@ -221,10 +247,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     showDropDownButton: true,
                     padding: EdgeInsets.zero,
                     showFlagMain: true,
-                    textStyle: TextStyle(color: Theme.of(context).textTheme.headline1.color),
-
+                    textStyle: TextStyle(
+                        color: Theme.of(context).textTheme.headline1.color),
                   ),
-                  Expanded(child: CustomTextField(
+                  Expanded(
+                      child: CustomTextField(
                     hintText: getTranslated('ENTER_MOBILE_NUMBER', context),
                     controller: _phoneController,
                     focusNode: _phoneFocus,
@@ -232,14 +259,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     isPhoneNumber: true,
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.phone,
-
                   )),
                 ]),
               ),
 
               // for password
               Container(
-                margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT, top: Dimensions.MARGIN_SIZE_SMALL),
+                margin: EdgeInsets.only(
+                    left: Dimensions.MARGIN_SIZE_DEFAULT,
+                    right: Dimensions.MARGIN_SIZE_DEFAULT,
+                    top: Dimensions.MARGIN_SIZE_SMALL),
                 child: CustomPasswordTextField(
                   hintTxt: getTranslated('PASSWORD', context),
                   controller: _passwordController,
@@ -251,7 +280,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
               // for re-enter password
               Container(
-                margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT, top: Dimensions.MARGIN_SIZE_SMALL),
+                margin: EdgeInsets.only(
+                    left: Dimensions.MARGIN_SIZE_DEFAULT,
+                    right: Dimensions.MARGIN_SIZE_DEFAULT,
+                    top: Dimensions.MARGIN_SIZE_SMALL),
                 child: CustomPasswordTextField(
                   hintTxt: getTranslated('RE_ENTER_PASSWORD', context),
                   controller: _confirmPasswordController,
@@ -274,7 +306,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     ),
                   ),
                 )
-              : CustomButton(onTap: addUser, buttonText: getTranslated('SIGN_UP', context)),
+              : CustomButton(
+                  onTap: addUser,
+                  buttonText: getTranslated('SIGN_UP', context)),
         ),
 
         SocialLoginWidget(),
@@ -285,10 +319,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             : Center(
                 child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => DashBoardScreen()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => DashBoardScreen()));
                 },
                 child: Text(getTranslated('SKIP_FOR_NOW', context),
-                    style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL, color: ColorResources.getColombiaBlue(context))),
+                    style: titilliumRegular.copyWith(
+                        fontSize: Dimensions.FONT_SIZE_SMALL,
+                        color: ColorResources.getColombiaBlue(context))),
               )),
       ],
     );

@@ -6,9 +6,7 @@ import 'package:flutter_sixvalley_ecommerce/data/model/response/chat_model.dart'
 import 'package:flutter_sixvalley_ecommerce/data/model/response/seller_model.dart';
 
 import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/utils.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/chat/widget/message_bubble.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/seller/seller_screen.dart';
