@@ -1,10 +1,10 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/repository.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/repository/repository.dart';
+import 'package:swape_user_app/helper/network_info.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

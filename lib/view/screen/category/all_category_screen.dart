@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
+import 'package:swape_user_app/data/model/response/category.dart';
 
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/utils.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/utils.dart';
+import 'package:swape_user_app/view/basewidget/custom_app_bar.dart';
+import 'package:swape_user_app/view/screen/product/brand_and_category_product_screen.dart';
 import 'package:provider/provider.dart';
 
 class AllCategoryScreen extends StatelessWidget {

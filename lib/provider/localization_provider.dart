@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalizationProvider extends ChangeNotifier {
@@ -9,7 +9,8 @@ class LocalizationProvider extends ChangeNotifier {
     _loadCurrentLanguage();
   }
 
-  Locale _locale = Locale(AppConstants.languages[0].languageCode, AppConstants.languages[0].countryCode);
+  Locale _locale = Locale(AppConstants.languages[0].languageCode,
+      AppConstants.languages[0].countryCode);
   bool _isLtr = true;
   int _languageIndex;
 
@@ -20,8 +21,8 @@ class LocalizationProvider extends ChangeNotifier {
   void setLanguage(Locale locale) {
     _locale = locale;
     _isLtr = _locale.languageCode != 'ar';
-    for(int index=0; index<AppConstants.languages.length; index++) {
-      if(AppConstants.languages[index].languageCode == locale.languageCode) {
+    for (int index = 0; index < AppConstants.languages.length; index++) {
+      if (AppConstants.languages[index].languageCode == locale.languageCode) {
         _languageIndex = index;
         break;
       }
@@ -31,11 +32,14 @@ class LocalizationProvider extends ChangeNotifier {
   }
 
   _loadCurrentLanguage() async {
-    _locale = Locale(sharedPreferences.getString(AppConstants.LANGUAGE_CODE) ?? AppConstants.languages[0].languageCode,
-        sharedPreferences.getString(AppConstants.COUNTRY_CODE) ?? AppConstants.languages[0].countryCode);
+    _locale = Locale(
+        sharedPreferences.getString(AppConstants.LANGUAGE_CODE) ??
+            AppConstants.languages[0].languageCode,
+        sharedPreferences.getString(AppConstants.COUNTRY_CODE) ??
+            AppConstants.languages[0].countryCode);
     _isLtr = _locale.languageCode != 'ar';
-    for(int index=0; index<AppConstants.languages.length; index++) {
-      if(AppConstants.languages[index].languageCode == locale.languageCode) {
+    for (int index = 0; index < AppConstants.languages.length; index++) {
+      if (AppConstants.languages[index].languageCode == locale.languageCode) {
         _languageIndex = index;
         break;
       }
@@ -44,7 +48,8 @@ class LocalizationProvider extends ChangeNotifier {
   }
 
   _saveLanguage(Locale locale) async {
-    sharedPreferences.setString(AppConstants.LANGUAGE_CODE, locale.languageCode);
+    sharedPreferences.setString(
+        AppConstants.LANGUAGE_CODE, locale.languageCode);
     sharedPreferences.setString(AppConstants.COUNTRY_CODE, locale.countryCode);
   }
 }

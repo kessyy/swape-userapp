@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchRepo {
@@ -23,11 +22,13 @@ class SearchRepo {
   // for save home address
   Future<void> saveSearchAddress(String searchAddress) async {
     try {
-      List<String> searchKeywordList = sharedPreferences.getStringList(AppConstants.SEARCH_ADDRESS);
+      List<String> searchKeywordList =
+          sharedPreferences.getStringList(AppConstants.SEARCH_ADDRESS);
       if (!searchKeywordList.contains(searchAddress)) {
         searchKeywordList.add(searchAddress);
       }
-      await sharedPreferences.setStringList(AppConstants.SEARCH_ADDRESS, searchKeywordList);
+      await sharedPreferences.setStringList(
+          AppConstants.SEARCH_ADDRESS, searchKeywordList);
     } catch (e) {
       throw e;
     }

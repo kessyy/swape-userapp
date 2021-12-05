@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/Men.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/women.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/kids.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/home_screen.dart';
+import 'package:swape_user_app/view/screen/home/Men.dart';
+import 'package:swape_user_app/view/screen/home/women.dart';
+import 'package:swape_user_app/view/screen/home/kids.dart';
+import 'package:swape_user_app/view/screen/home/home_screen.dart';
 
 import 'package:flutter/rendering.dart';
 

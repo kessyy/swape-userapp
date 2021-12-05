@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/body/login_model.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_password_textfield.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_textfield.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/auth/forget_password_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/auth/widget/social_login_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen.dart';
+import 'package:swape_user_app/data/model/body/login_model.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/button/custom_button.dart';
+import 'package:swape_user_app/view/basewidget/textfield/custom_password_textfield.dart';
+import 'package:swape_user_app/view/basewidget/textfield/custom_textfield.dart';
+import 'package:swape_user_app/view/screen/auth/forget_password_screen.dart';
+import 'package:swape_user_app/view/screen/auth/widget/social_login_widget.dart';
+import 'package:swape_user_app/view/screen/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 
 class SignInWidget extends StatefulWidget {

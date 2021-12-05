@@ -1,29 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/localization_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/shimmer_loading.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/seller/seller_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/order_details.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/order_model.dart';
+import 'package:swape_user_app/provider/localization_provider.dart';
+import 'package:swape_user_app/provider/splash_provider.dart';
+import 'package:swape_user_app/view/basewidget/shimmer_loading.dart';
+import 'package:swape_user_app/view/screen/seller/seller_screen.dart';
+import 'package:swape_user_app/data/model/response/order_details.dart';
+import 'package:swape_user_app/data/model/response/order_model.dart';
 
-import 'package:flutter_sixvalley_ecommerce/helper/price_converter.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/order_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/seller_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/amount_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/show_custom_snakbar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/order/widget/order_details_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/payment/payment_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/support/support_ticket_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/tracking/tracking_screen.dart';
+import 'package:swape_user_app/helper/price_converter.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/order_provider.dart';
+import 'package:swape_user_app/provider/profile_provider.dart';
+import 'package:swape_user_app/provider/seller_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/amount_widget.dart';
+import 'package:swape_user_app/view/basewidget/button/custom_button.dart';
+import 'package:swape_user_app/view/basewidget/custom_app_bar.dart';
+import 'package:swape_user_app/view/basewidget/show_custom_snakbar.dart';
+import 'package:swape_user_app/view/basewidget/title_row.dart';
+import 'package:swape_user_app/view/screen/order/widget/order_details_widget.dart';
+import 'package:swape_user_app/view/screen/payment/payment_screen.dart';
+import 'package:swape_user_app/view/screen/support/support_ticket_screen.dart';
+import 'package:swape_user_app/view/screen/tracking/tracking_screen.dart';
 import 'package:provider/provider.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
@@ -32,22 +32,34 @@ class OrderDetailsScreen extends StatelessWidget {
   OrderDetailsScreen({@required this.orderModel, @required this.orderId});
 
   void _loadData(BuildContext context) async {
-    await Provider.of<OrderProvider>(context, listen: false).initTrackingInfo(orderId.toString(), orderModel, true, context);
+    await Provider.of<OrderProvider>(context, listen: false)
+        .initTrackingInfo(orderId.toString(), orderModel, true, context);
     if (orderModel == null) {
-      await Provider.of<SplashProvider>(context, listen: false).initConfig(context);
+      await Provider.of<SplashProvider>(context, listen: false)
+          .initConfig(context);
     }
     Provider.of<SellerProvider>(context, listen: false).removePrevOrderSeller();
     //await Provider.of<ProfileProvider>(context, listen: false).initAddressList(context);
-    if(Provider.of<SplashProvider>(context, listen: false).configModel.shippingMethod == 'sellerwise_shipping') {
+    if (Provider.of<SplashProvider>(context, listen: false)
+            .configModel
+            .shippingMethod ==
+        'sellerwise_shipping') {
       await Provider.of<OrderProvider>(context, listen: false).initShippingList(
-        context, Provider.of<OrderProvider>(context, listen: false).trackingModel.sellerId,
+        context,
+        Provider.of<OrderProvider>(context, listen: false)
+            .trackingModel
+            .sellerId,
       );
-    }else {
-      await Provider.of<OrderProvider>(context, listen: false).initShippingList(context, 1);
+    } else {
+      await Provider.of<OrderProvider>(context, listen: false)
+          .initShippingList(context, 1);
     }
     Provider.of<OrderProvider>(context, listen: false).getOrderDetails(
-      orderId.toString(), context,
-      Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode,
+      orderId.toString(),
+      context,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
     );
   }
 
@@ -156,8 +168,10 @@ class OrderDetailsScreen extends StatelessWidget {
                                       if (profile.addressList != null) {
                                         profile.addressList.forEach((address) {
                                           if (address.id ==
-                                              order.trackingModel.shippingAddress) {
-                                            shippingAddress = address.address ?? '';
+                                              order.trackingModel
+                                                  .shippingAddress) {
+                                            shippingAddress =
+                                                address.address ?? '';
                                           }
                                         });
                                       }
@@ -345,7 +359,8 @@ class OrderDetailsScreen extends StatelessWidget {
                                         context,
                                         (_order +
                                             _shippingFee -
-                                            _discount - order.trackingModel.discountAmount +
+                                            _discount -
+                                            order.trackingModel.discountAmount +
                                             _tax)),
                                   ),
                                 ]),
@@ -417,11 +432,16 @@ class OrderDetailsScreen extends StatelessWidget {
                                                   Navigator.pushReplacement(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (_) => PaymentScreen(
-                                                            customerID: userID,
-                                                            couponCode: '',
-                                                            addressID: order.trackingModel.shippingAddress.toString(),
-                                                          )));
+                                                          builder: (_) =>
+                                                              PaymentScreen(
+                                                                customerID:
+                                                                    userID,
+                                                                couponCode: '',
+                                                                addressID: order
+                                                                    .trackingModel
+                                                                    .shippingAddress
+                                                                    .toString(),
+                                                              )));
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(

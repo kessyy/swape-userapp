@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/seller_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/seller_repo.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/api_checker.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/data/model/response/seller_model.dart';
+import 'package:swape_user_app/data/repository/seller_repo.dart';
+import 'package:swape_user_app/helper/api_checker.dart';
 
 class SellerProvider extends ChangeNotifier {
   final SellerRepo sellerRepo;
@@ -16,7 +16,8 @@ class SellerProvider extends ChangeNotifier {
 
   void initSeller(String sellerId, BuildContext context) async {
     ApiResponse apiResponse = await sellerRepo.getSeller(sellerId);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _orderSellerList.add(SellerModel.fromJson(apiResponse.response.data));
       _sellerModel = SellerModel.fromJson(apiResponse.response.data);
     } else {

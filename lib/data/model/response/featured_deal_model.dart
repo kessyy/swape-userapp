@@ -1,5 +1,4 @@
-
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
 class FeaturedDealModel {
   int id;
@@ -13,13 +12,13 @@ class FeaturedDealModel {
 
   FeaturedDealModel(
       {this.id,
-        this.flashDealId,
-        this.productId,
-        this.discount,
-        this.discountType,
-        this.createdAt,
-        this.updatedAt,
-        this.product});
+      this.flashDealId,
+      this.productId,
+      this.discount,
+      this.discountType,
+      this.createdAt,
+      this.updatedAt,
+      this.product});
 
   FeaturedDealModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,7 +28,8 @@ class FeaturedDealModel {
     discountType = json['discount_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    product = json['product'] != null ? new Product.fromJson(json['product']) : null;
+    product =
+        json['product'] != null ? new Product.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -47,5 +47,3 @@ class FeaturedDealModel {
     return data;
   }
 }
-
-

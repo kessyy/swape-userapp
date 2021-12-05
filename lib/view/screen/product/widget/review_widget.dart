@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/review_model.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/product_details_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/rating_bar.dart';
+import 'package:swape_user_app/data/model/response/review_model.dart';
+import 'package:swape_user_app/provider/product_details_provider.dart';
+import 'package:swape_user_app/provider/splash_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/utill/images.dart';
+import 'package:swape_user_app/view/basewidget/rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -21,58 +21,78 @@ class ReviewWidget extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: FadeInImage.assetNetwork(
-            placeholder: Images.placeholder, height: 30, width: 30, fit: BoxFit.cover,
-            image: '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}/${reviewModel.customer.image}',
-            imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, height: 30, width: 30, fit: BoxFit.cover),
+            placeholder: Images.placeholder,
+            height: 30,
+            width: 30,
+            fit: BoxFit.cover,
+            image:
+                '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}/${reviewModel.customer.image}',
+            imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder,
+                height: 30, width: 30, fit: BoxFit.cover),
           ),
         ),
         SizedBox(width: 5),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
-            Text('${reviewModel.customer.fName} ${reviewModel.customer.lName}',
-              style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
+            Text(
+              '${reviewModel.customer.fName} ${reviewModel.customer.lName}',
+              style: titilliumRegular.copyWith(
+                  fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(width: 5),
             RatingBar(rating: reviewModel.rating.toDouble(), size: 12),
           ]),
-          Text(reviewModel.updatedAt, style: titilliumRegular.copyWith(
-            color: Theme.of(context).hintColor,
-            fontSize: 6,
-          )),
+          Text(reviewModel.updatedAt,
+              style: titilliumRegular.copyWith(
+                color: Theme.of(context).hintColor,
+                fontSize: 6,
+              )),
         ]),
       ]),
       SizedBox(height: 5),
-
       Text(
-        reviewModel.comment, style: titilliumRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
+        reviewModel.comment,
+        style: titilliumRegular.copyWith(
+            color: Theme.of(context).hintColor,
+            fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
       SizedBox(height: 5),
-
-      reviewModel.attachment.length > 0 ? SizedBox(
-        height: 30,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: reviewModel.attachment.length,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.only(right: Dimensions.PADDING_SIZE_SMALL),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: FadeInImage.assetNetwork(
-                  placeholder: Images.placeholder, height: 30, width: 30, fit: BoxFit.cover,
-                  image: '${Provider.of<SplashProvider>(context, listen: false).baseUrls.reviewImageUrl}/${reviewModel.attachment[index]}',
-                  imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, height: 30, width: 30, fit: BoxFit.cover),
-                ),
+      reviewModel.attachment.length > 0
+          ? SizedBox(
+              height: 30,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: reviewModel.attachment.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin:
+                        EdgeInsets.only(right: Dimensions.PADDING_SIZE_SMALL),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: Images.placeholder,
+                        height: 30,
+                        width: 30,
+                        fit: BoxFit.cover,
+                        image:
+                            '${Provider.of<SplashProvider>(context, listen: false).baseUrls.reviewImageUrl}/${reviewModel.attachment[index]}',
+                        imageErrorBuilder: (c, o, s) => Image.asset(
+                            Images.placeholder,
+                            height: 30,
+                            width: 30,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ) : SizedBox(),
+            )
+          : SizedBox(),
     ]);
   }
 }
@@ -107,4 +127,3 @@ class ReviewShimmer extends StatelessWidget {
     );
   }
 }
-

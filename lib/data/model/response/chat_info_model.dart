@@ -1,5 +1,5 @@
-import 'package:flutter_sixvalley_ecommerce/data/model/response/chat_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/seller_model.dart';
+import 'package:swape_user_app/data/model/response/chat_model.dart';
+import 'package:swape_user_app/data/model/response/seller_model.dart';
 
 class ChatInfoModel {
   LastChat _lastChat;
@@ -8,8 +8,8 @@ class ChatInfoModel {
 
   ChatInfoModel(
       {LastChat lastChat,
-        List<ChatModel> chatList,
-        List<UniqueShops> uniqueShops}) {
+      List<ChatModel> chatList,
+      List<UniqueShops> uniqueShops}) {
     this._lastChat = lastChat;
     this._chatList = chatList;
     this._uniqueShops = uniqueShops;
@@ -68,17 +68,17 @@ class LastChat {
 
   LastChat(
       {int id,
-        int userId,
-        int sellerId,
-        String message,
-        int sentByCustomer,
-        int sentBySeller,
-        int seenByCustomer,
-        int seenBySeller,
-        int status,
-        String createdAt,
-        String updatedAt,
-        int shopId}) {
+      int userId,
+      int sellerId,
+      String message,
+      int sentByCustomer,
+      int sentBySeller,
+      int seenByCustomer,
+      int seenBySeller,
+      int status,
+      String createdAt,
+      String updatedAt,
+      int shopId}) {
     this._id = id;
     this._userId = userId;
     this._sellerId = sellerId;
@@ -157,19 +157,19 @@ class UniqueShops {
 
   UniqueShops(
       {int id,
-        int userId,
-        int sellerId,
-        String message,
-        int sentByCustomer,
-        int sentBySeller,
-        int seenByCustomer,
-        int seenBySeller,
-        int status,
-        String createdAt,
-        String updatedAt,
-        int shopId,
-        SellerModel sellerInfo,
-        Shop shop}) {
+      int userId,
+      int sellerId,
+      String message,
+      int sentByCustomer,
+      int sentBySeller,
+      int seenByCustomer,
+      int seenBySeller,
+      int status,
+      String createdAt,
+      String updatedAt,
+      int shopId,
+      SellerModel sellerInfo,
+      Shop shop}) {
     this._id = id;
     this._userId = userId;
     this._sellerId = sellerId;

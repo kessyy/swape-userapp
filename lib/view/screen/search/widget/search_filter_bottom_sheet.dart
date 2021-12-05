@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/search_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/search_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/button/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class SearchFilterBottomSheet extends StatefulWidget {
   @override
-  _SearchFilterBottomSheetState createState() => _SearchFilterBottomSheetState();
+  _SearchFilterBottomSheetState createState() =>
+      _SearchFilterBottomSheetState();
 }
 
 class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
@@ -24,12 +25,14 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       decoration: BoxDecoration(
         color: Theme.of(context).highlightColor,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
-
         Row(children: [
-          Expanded(child: Text(getTranslated('sort_and_filters', context), style: titilliumBold)),
+          Expanded(
+              child: Text(getTranslated('sort_and_filters', context),
+                  style: titilliumBold)),
           InkWell(
             onTap: () => Navigator.pop(context),
             child: Icon(Icons.cancel, color: ColorResources.getRed(context)),
@@ -37,33 +40,37 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
         ]),
         Divider(),
         SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
         Consumer<SearchProvider>(
           builder: (context, search, child) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-
               SizedBox(
                 height: 35,
                 child: Row(
                   children: [
-                    Expanded(child: Text(getTranslated('PRICE_RANGE', context), style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
+                    Expanded(
+                        child: Text(getTranslated('PRICE_RANGE', context),
+                            style: titilliumSemiBold.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_SMALL))),
                     SizedBox(
                       width: 100,
                       child: TextField(
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
-                        onSubmitted: (_) => FocusScope.of(context).requestFocus(_lastFocus),
+                        onSubmitted: (_) =>
+                            FocusScope.of(context).requestFocus(_lastFocus),
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         focusNode: _firstFocus,
                         controller: _firstPriceController,
-                        style: titilliumBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
+                        style: titilliumBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL),
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorResources.getImageBg(context),
-                          contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                          contentPadding:
+                              EdgeInsets.only(left: 5.0, bottom: 17),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(5),
@@ -72,7 +79,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(5.7),
                           ),
-
                         ),
                       ),
                     ),
@@ -92,7 +98,8 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorResources.getImageBg(context),
-                          contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                          contentPadding:
+                              EdgeInsets.only(left: 5.0, bottom: 17),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(5),
@@ -101,7 +108,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(5.7),
                           ),
-
                         ),
                       ),
                     ),
@@ -109,24 +115,34 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                 ),
               ),
               SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
               Text(
                 getTranslated('SORT_BY', context),
-                style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).hintColor),
+                style: titilliumSemiBold.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_SMALL,
+                    color: Theme.of(context).hintColor),
               ),
-
-              MyCheckBox(title: getTranslated('latest_products', context), index: 0),
-
+              MyCheckBox(
+                  title: getTranslated('latest_products', context), index: 0),
               Row(children: [
-                Expanded(child: MyCheckBox(title: getTranslated('alphabetically_az', context), index: 1)),
-                Expanded(child: MyCheckBox(title: getTranslated('alphabetically_za', context), index: 2)),
+                Expanded(
+                    child: MyCheckBox(
+                        title: getTranslated('alphabetically_az', context),
+                        index: 1)),
+                Expanded(
+                    child: MyCheckBox(
+                        title: getTranslated('alphabetically_za', context),
+                        index: 2)),
               ]),
-
               Row(children: [
-                Expanded(child: MyCheckBox(title: getTranslated('low_to_high_price', context), index: 3)),
-                Expanded(child: MyCheckBox(title: getTranslated('high_to_low_price', context), index: 4)),
+                Expanded(
+                    child: MyCheckBox(
+                        title: getTranslated('low_to_high_price', context),
+                        index: 3)),
+                Expanded(
+                    child: MyCheckBox(
+                        title: getTranslated('high_to_low_price', context),
+                        index: 4)),
               ]),
-
               Padding(
                 padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                 child: CustomButton(
@@ -134,11 +150,13 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                   onTap: () {
                     double minPrice = 0.0;
                     double maxPrice = 0.0;
-                    if(_firstPriceController.text.isNotEmpty && _lastPriceController.text.isNotEmpty) {
+                    if (_firstPriceController.text.isNotEmpty &&
+                        _lastPriceController.text.isNotEmpty) {
                       minPrice = double.parse(_firstPriceController.text);
                       maxPrice = double.parse(_lastPriceController.text);
                     }
-                    Provider.of<SearchProvider>(context, listen: false).sortSearchList(minPrice, maxPrice);
+                    Provider.of<SearchProvider>(context, listen: false)
+                        .sortSearchList(minPrice, maxPrice);
                     Navigator.pop(context);
                   },
                 ),
@@ -146,7 +164,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
             ],
           ),
         ),
-
       ]),
     );
   }
@@ -160,17 +177,19 @@ class MyCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      title: Text(title, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
+      title: Text(title,
+          style:
+              titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
       checkColor: Theme.of(context).primaryColor,
       activeColor: Colors.transparent,
       value: Provider.of<SearchProvider>(context).filterIndex == index,
       onChanged: (isChecked) {
-        if(isChecked) {
-          Provider.of<SearchProvider>(context, listen: false).setFilterIndex(index);
+        if (isChecked) {
+          Provider.of<SearchProvider>(context, listen: false)
+              .setFilterIndex(index);
         }
       },
       controlAffinity: ListTileControlAffinity.leading,
     );
   }
 }
-

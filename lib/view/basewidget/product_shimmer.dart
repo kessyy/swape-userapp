@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductShimmer extends StatelessWidget {
@@ -31,43 +31,53 @@ class ProductShimmer extends StatelessWidget {
             baseColor: Colors.white,
             highlightColor: Colors.white10,
             enabled: isEnabled,
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              // Product Image
-              Expanded(
-                flex: 6,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: ColorResources.getIconBg(context),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Product Image
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorResources.getIconBg(context),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                      ),
+                    ),
                   ),
-                ),
-              ),
 
-              // Product Details
-              Expanded(
-                flex: 4,
-                child: Padding(
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(height: 20, color: Colors.white),
-                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                      Row(children: [
-                        Expanded(
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Container(height: 20, width: 50, color: Colors.white),
+                  // Product Details
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(height: 20, color: Colors.white),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          Row(children: [
+                            Expanded(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        height: 20,
+                                        width: 50,
+                                        color: Colors.white),
+                                  ]),
+                            ),
+                            Container(
+                                height: 10, width: 50, color: Colors.white),
+                            Icon(Icons.star, color: Colors.orange, size: 15),
                           ]),
-                        ),
-                        Container(height: 10, width: 50, color: Colors.white),
-                        Icon(Icons.star, color: Colors.orange, size: 15),
-                      ]),
-                    ],
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ]),
+                ]),
           ),
         );
       },

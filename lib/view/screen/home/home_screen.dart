@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/AllScreen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/Men.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/chat/inbox_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/interior_design.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/kids.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/women.dart';
+import 'package:swape_user_app/data/model/response/category.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/utill/images.dart';
+import 'package:swape_user_app/view/screen/home/AllScreen.dart';
+import 'package:swape_user_app/view/screen/cart/cart_screen.dart';
+import 'package:swape_user_app/view/screen/home/Men.dart';
+import 'package:swape_user_app/view/screen/chat/inbox_screen.dart';
+import 'package:swape_user_app/view/screen/home/interior_design.dart';
+import 'package:swape_user_app/view/screen/home/kids.dart';
+import 'package:swape_user_app/view/screen/search/search_screen.dart';
+import 'package:swape_user_app/view/screen/home/women.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
 
@@ -54,7 +54,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _tabs(List<AllCategory> categories) {
     print({"FirstCategory": categories.first.toJson()});
-    List<Tab> myTabs = [];
+    List<Tab> myTabs = [
+      Tab(
+        text: 'All',
+      )
+    ];
     if (categories.isEmpty) {
       return Scaffold();
     }
@@ -62,11 +66,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
       myTabs.add(Tab(
         child: Text(
           categories[i].name,
+          // style: titilliumSemiBold.copyWith(
+          //   fontSize: Dimensions.FONT_SIZE_LARGE,
+          // ),
         ),
       ));
     }
     return DefaultTabController(
-      length: categories.length,
+      length: categories.length + 1,
       child: Scaffold(
           body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -148,6 +155,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 indicatorSize: TabBarIndicatorSize.label,
                 labelColor: Colors.black,
                 isScrollable: true,
+                labelStyle: titilliumSemiBold.copyWith(
+                  fontSize: Dimensions.FONT_SIZE_LARGE,
+                ),
                 tabs: myTabs,
               ),
             ),
@@ -159,6 +169,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
             MenScreen(),
             WomenScreen(),
             InteriorDesignScreen(),
+            KidsScreen(),
+            KidsScreen(),
             KidsScreen(),
           ],
         ),

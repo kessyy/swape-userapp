@@ -1,5 +1,5 @@
-import 'package:flutter_sixvalley_ecommerce/data/model/response/cart_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+import 'package:swape_user_app/data/model/response/cart_model.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
 class OrderPlaceModel {
   CustomerInfo _customerInfo;
@@ -7,11 +7,8 @@ class OrderPlaceModel {
   String _paymentMethod;
   double _discount;
 
-  OrderPlaceModel(
-      CustomerInfo customerInfo,
-        List<CartModel> cart,
-        String paymentMethod,
-        double discount) {
+  OrderPlaceModel(CustomerInfo customerInfo, List<CartModel> cart,
+      String paymentMethod, double discount) {
     this._customerInfo = customerInfo;
     this._cart = cart;
     this._paymentMethod = paymentMethod;
@@ -91,14 +88,14 @@ class Cart {
   Cart(
       String id,
       double tax,
-        int quantity,
-        double price,
-        double discount,
-        String discountType,
-        int shippingMethodId,
-        String variant,
-        List<Variation> variation,
-        double shippingCost) {
+      int quantity,
+      double price,
+      double discount,
+      String discountType,
+      int shippingMethodId,
+      String variant,
+      List<Variation> variation,
+      double shippingCost) {
     this._id = id;
     this._tax = tax;
     this._quantity = quantity;

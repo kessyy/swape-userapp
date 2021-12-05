@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/home_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/women.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/men.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/kids.dart';
+import 'package:swape_user_app/data/model/response/category.dart';
+import 'package:swape_user_app/provider/category_provider.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/screen/home/home_screen.dart';
+import 'package:swape_user_app/view/screen/home/women.dart';
+import 'package:swape_user_app/view/screen/home/men.dart';
+import 'package:swape_user_app/view/screen/home/kids.dart';
 import 'package:provider/provider.dart';
 
 class TabNavigatorRoutes {

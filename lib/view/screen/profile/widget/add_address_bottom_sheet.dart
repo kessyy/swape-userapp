@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/address_model.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_textfield.dart';
+import 'package:swape_user_app/data/model/response/address_model.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/profile_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/button/custom_button.dart';
+import 'package:swape_user_app/view/basewidget/textfield/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 class AddAddressBottomSheet extends StatefulWidget {
@@ -26,23 +26,28 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(null);
+    Provider.of<ProfileProvider>(context, listen: false)
+        .setAddAddressErrorText(null);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
-      decoration: BoxDecoration(color: Theme.of(context).highlightColor, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      decoration: BoxDecoration(
+          color: Theme.of(context).highlightColor,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       child: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: 10),
-              Consumer<ProfileProvider>(builder: (context, profileProvider, child) {
+              Consumer<ProfileProvider>(
+                  builder: (context, profileProvider, child) {
                 return Container(
                   padding: EdgeInsets.only(
                     left: Dimensions.PADDING_SIZE_DEFAULT,
@@ -58,13 +63,16 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
                         offset: Offset(0, 1), // changes position of shadow
                       )
                     ],
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(6),
+                        bottomLeft: Radius.circular(6)),
                   ),
                   alignment: Alignment.center,
                   child: DropdownButtonFormField<String>(
                     value: profileProvider.addressType,
                     isExpanded: true,
-                    icon: Icon(Icons.keyboard_arrow_down, color: Theme.of(context).primaryColor),
+                    icon: Icon(Icons.keyboard_arrow_down,
+                        color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(border: InputBorder.none),
                     iconSize: 24,
                     elevation: 16,
@@ -72,10 +80,16 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
                     //underline: SizedBox(),
 
                     onChanged: profileProvider.updateCountryCode,
-                    items: profileProvider.addressTypeList.map<DropdownMenuItem<String>>((String value) {
+                    items: profileProvider.addressTypeList
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value, style: titilliumRegular.copyWith(color: Theme.of(context).textTheme.bodyText1.color)),
+                        child: Text(value,
+                            style: titilliumRegular.copyWith(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .color)),
                       );
                     }).toList(),
                   ),
@@ -110,18 +124,24 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               ),
               SizedBox(height: 30),
               Provider.of<ProfileProvider>(context).addAddressErrorText != null
-                  ? Text(Provider.of<ProfileProvider>(context).addAddressErrorText, style: titilliumRegular.copyWith(color: ColorResources.RED))
+                  ? Text(
+                      Provider.of<ProfileProvider>(context).addAddressErrorText,
+                      style:
+                          titilliumRegular.copyWith(color: ColorResources.RED))
                   : SizedBox.shrink(),
               Consumer<ProfileProvider>(
                 builder: (context, profileProvider, child) {
                   return profileProvider.isLoading
-                      ? CircularProgressIndicator(key: Key(''), valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))
+                      ? CircularProgressIndicator(
+                          key: Key(''),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).primaryColor))
                       : CustomButton(
-                    buttonText: getTranslated('UPDATE_ADDRESS', context),
-                    onTap: () {
-                      _addAddress();
-                    },
-                  );
+                          buttonText: getTranslated('UPDATE_ADDRESS', context),
+                          onTap: () {
+                            _addAddress();
+                          },
+                        );
                 },
               ),
               SizedBox(height: 10),
@@ -133,25 +153,38 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
   }
 
   _addAddress() {
-    if(Provider.of<ProfileProvider>(context, listen: false).addressType == Provider.of<ProfileProvider>(context, listen: false).addressTypeList[0]) {
-      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('SELECT_ADDRESS_TYPE', context));
-    } else if(_addressController.text.isEmpty) {
-      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('ADDRESS_FIELD_MUST_BE_REQUIRED', context));
-    } else if(_cityNameController.text.isEmpty) {
-      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('CITY_FIELD_MUST_BE_REQUIRED', context));
-    } else if(_zipCodeController.text.isEmpty) {
-      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(getTranslated('ZIPCODE_FIELD_MUST_BE_REQUIRED', context));
+    if (Provider.of<ProfileProvider>(context, listen: false).addressType ==
+        Provider.of<ProfileProvider>(context, listen: false)
+            .addressTypeList[0]) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setAddAddressErrorText(
+              getTranslated('SELECT_ADDRESS_TYPE', context));
+    } else if (_addressController.text.isEmpty) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setAddAddressErrorText(
+              getTranslated('ADDRESS_FIELD_MUST_BE_REQUIRED', context));
+    } else if (_cityNameController.text.isEmpty) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setAddAddressErrorText(
+              getTranslated('CITY_FIELD_MUST_BE_REQUIRED', context));
+    } else if (_zipCodeController.text.isEmpty) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setAddAddressErrorText(
+              getTranslated('ZIPCODE_FIELD_MUST_BE_REQUIRED', context));
     } else {
-      Provider.of<ProfileProvider>(context, listen: false).setAddAddressErrorText(null);
+      Provider.of<ProfileProvider>(context, listen: false)
+          .setAddAddressErrorText(null);
       AddressModel addressModel = AddressModel();
       addressModel.contactPersonName = 'x';
-      addressModel.addressType = Provider.of<ProfileProvider>(context, listen: false).addressType;
+      addressModel.addressType =
+          Provider.of<ProfileProvider>(context, listen: false).addressType;
       addressModel.city = _cityNameController.text;
       addressModel.address = _addressController.text;
       addressModel.zip = _zipCodeController.text;
       addressModel.phone = '0';
 
-      Provider.of<ProfileProvider>(context, listen: false).addAddress(addressModel, route);
+      Provider.of<ProfileProvider>(context, listen: false)
+          .addAddress(addressModel, route);
     }
   }
 
@@ -159,7 +192,8 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
     if (isRoute) {
       _cityNameController.clear();
       _zipCodeController.clear();
-      Provider.of<ProfileProvider>(context, listen: false).initAddressList(context);
+      Provider.of<ProfileProvider>(context, listen: false)
+          .initAddressList(context);
       Navigator.pop(context);
     }
   }

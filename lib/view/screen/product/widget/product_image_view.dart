@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/product_details_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/wishlist_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/product_image_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/favourite_button.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
+import 'package:swape_user_app/provider/product_details_provider.dart';
+import 'package:swape_user_app/provider/splash_provider.dart';
+import 'package:swape_user_app/provider/theme_provider.dart';
+import 'package:swape_user_app/provider/wishlist_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/utill/images.dart';
+import 'package:swape_user_app/view/screen/product/product_image_screen.dart';
+import 'package:swape_user_app/view/screen/product/widget/favourite_button.dart';
 import 'package:provider/provider.dart';
 
 class ProductImageView extends StatelessWidget {
@@ -23,17 +23,29 @@ class ProductImageView extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProductImageScreen(imageList: productModel.images, title: productModel.name))),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => ProductImageScreen(
+                  imageList: productModel.images, title: productModel.name))),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.black,
               // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-              boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ? 700 : 300], spreadRadius: 1, blurRadius: 5)],
-              gradient: Provider.of<ThemeProvider>(context).darkTheme ? null : LinearGradient(
-                colors: [ColorResources.WHITE, ColorResources.WHITE],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[
+                        Provider.of<ThemeProvider>(context).darkTheme
+                            ? 700
+                            : 300],
+                    spreadRadius: 1,
+                    blurRadius: 5)
+              ],
+              gradient: Provider.of<ThemeProvider>(context).darkTheme
+                  ? null
+                  : LinearGradient(
+                      colors: [ColorResources.WHITE, ColorResources.WHITE],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
             ),
             child: Stack(children: [
               SizedBox(
@@ -45,22 +57,28 @@ class ProductImageView extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: FadeInImage.assetNetwork(
-                        placeholder: Images.placeholder, 
+                        placeholder: Images.placeholder,
                         // height: MediaQuery.of(context).size.width, width: MediaQuery.of(context).size.width,
-                        image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.productImageUrl}/${productModel.images[index]}',
+                        image:
+                            '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}/${productModel.images[index]}',
                         imageErrorBuilder: (c, o, s) => Image.asset(
-                          Images.placeholder, height: MediaQuery.of(context).size.width, width: MediaQuery.of(context).size.width,
+                          Images.placeholder,
+                          height: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width,
                         ),
                       ),
                     );
                   },
                   onPageChanged: (index) {
-                    Provider.of<ProductDetailsProvider>(context, listen: false).setImageSliderSelectedIndex(index);
+                    Provider.of<ProductDetailsProvider>(context, listen: false)
+                        .setImageSliderSelectedIndex(index);
                   },
                 ),
               ),
               Positioned(
-                left: 0, right: 0, bottom: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 20),
                   child: Row(
@@ -75,11 +93,12 @@ class ProductImageView extends StatelessWidget {
                 child: FavouriteButton(
                   backgroundColor: ColorResources.getImageBg(context),
                   favColor: ColorResources.getPrimary(context),
-                  isSelected: Provider.of<WishListProvider>(context,listen: false).isWish,
+                  isSelected:
+                      Provider.of<WishListProvider>(context, listen: false)
+                          .isWish,
                   productId: productModel.id,
                 ),
               ),
-
             ]),
           ),
         ),
@@ -128,12 +147,14 @@ class ProductImageView extends StatelessWidget {
     List<Widget> indicators = [];
     for (int index = 0; index < productModel.images.length; index++) {
       indicators.add(TabPageSelectorIndicator(
-        backgroundColor: index == Provider.of<ProductDetailsProvider>(context).imageSliderIndex ? Theme.of(context).primaryColor : ColorResources.WHITE,
+        backgroundColor: index ==
+                Provider.of<ProductDetailsProvider>(context).imageSliderIndex
+            ? Theme.of(context).primaryColor
+            : ColorResources.WHITE,
         borderColor: ColorResources.WHITE,
         size: 10,
       ));
     }
     return indicators;
   }
-
 }

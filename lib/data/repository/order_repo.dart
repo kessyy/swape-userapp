@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 
 class OrderRepo {
   final DioClient dioClient;
@@ -19,10 +19,12 @@ class OrderRepo {
     }
   }
 
-  Future<ApiResponse> getOrderDetails(String orderID, String languageCode) async {
+  Future<ApiResponse> getOrderDetails(
+      String orderID, String languageCode) async {
     try {
       final response = await dioClient.get(
-        AppConstants.ORDER_DETAILS_URI+orderID, options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
+        AppConstants.ORDER_DETAILS_URI + orderID,
+        options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {
@@ -39,10 +41,10 @@ class OrderRepo {
     }
   }
 
-
   Future<ApiResponse> placeOrder(String addressID, String couponCode) async {
     try {
-      final response = await dioClient.get(AppConstants.ORDER_PLACE_URI+'?address_id=$addressID&coupon_code=$couponCode');
+      final response = await dioClient.get(AppConstants.ORDER_PLACE_URI +
+          '?address_id=$addressID&coupon_code=$couponCode');
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -51,7 +53,7 @@ class OrderRepo {
 
   Future<ApiResponse> getTrackingInfo(String orderID) async {
     try {
-      final response = await dioClient.get(AppConstants.TRACKING_URI+orderID);
+      final response = await dioClient.get(AppConstants.TRACKING_URI + orderID);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -60,12 +62,14 @@ class OrderRepo {
 
   Future<ApiResponse> getShippingMethod(int sellerId) async {
     try {
-      final response = sellerId==1?await dioClient.get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/admin'):
-      await dioClient.get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/seller');
+      final response = sellerId == 1
+          ? await dioClient
+              .get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/admin')
+          : await dioClient
+              .get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/seller');
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
 }

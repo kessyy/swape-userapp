@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/order_model.dart';
+import 'package:swape_user_app/data/model/response/order_model.dart';
 
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/order_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/not_loggedin_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/order/widget/order_widget.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/auth_provider.dart';
+import 'package:swape_user_app/provider/order_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/custom_app_bar.dart';
+import 'package:swape_user_app/view/basewidget/not_loggedin_widget.dart';
+import 'package:swape_user_app/view/screen/order/widget/order_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -22,10 +22,12 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isGuestMode = !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
-    if(isFirstTime) {
-      if(!isGuestMode) {
-        Provider.of<OrderProvider>(context, listen: false).initOrderList(context);
+    bool isGuestMode =
+        !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
+    if (isFirstTime) {
+      if (!isGuestMode) {
+        Provider.of<OrderProvider>(context, listen: false)
+            .initOrderList(context);
       }
 
       isFirstTime = false;
@@ -35,7 +37,9 @@ class OrderScreen extends StatelessWidget {
       backgroundColor: ColorResources.getIconBg(context),
       body: Column(
         children: [
-          CustomAppBar(title: getTranslated('ORDER', context), isBackButtonExist: isBacButtonExist),
+          CustomAppBar(
+              title: getTranslated('ORDER', context),
+              isBackButtonExist: isBacButtonExist),
           isGuestMode
               ? SizedBox()
               : Provider.of<OrderProvider>(context).pendingList != null
@@ -44,11 +48,20 @@ class OrderScreen extends StatelessWidget {
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
                         child: Row(
                           children: [
-                            OrderTypeButton(text: getTranslated('RUNNING', context), index: 0, orderList: orderProvider.pendingList),
+                            OrderTypeButton(
+                                text: getTranslated('RUNNING', context),
+                                index: 0,
+                                orderList: orderProvider.pendingList),
                             SizedBox(width: 10),
-                            OrderTypeButton(text: getTranslated('DELIVERED', context), index: 1, orderList: orderProvider.deliveredList),
+                            OrderTypeButton(
+                                text: getTranslated('DELIVERED', context),
+                                index: 1,
+                                orderList: orderProvider.deliveredList),
                             SizedBox(width: 10),
-                            OrderTypeButton(text: getTranslated('CANCELED', context), index: 2, orderList: orderProvider.canceledList),
+                            OrderTypeButton(
+                                text: getTranslated('CANCELED', context),
+                                index: 2,
+                                orderList: orderProvider.canceledList),
                           ],
                         ),
                       ),
@@ -60,23 +73,34 @@ class OrderScreen extends StatelessWidget {
                   ? Consumer<OrderProvider>(
                       builder: (context, order, child) {
                         List<OrderModel> orderList = [];
-                        if (Provider.of<OrderProvider>(context, listen: false).orderTypeIndex == 0) {
+                        if (Provider.of<OrderProvider>(context, listen: false)
+                                .orderTypeIndex ==
+                            0) {
                           orderList = order.pendingList;
-                        } else if (Provider.of<OrderProvider>(context, listen: false).orderTypeIndex == 1) {
+                        } else if (Provider.of<OrderProvider>(context,
+                                    listen: false)
+                                .orderTypeIndex ==
+                            1) {
                           orderList = order.deliveredList;
-                        } else if (Provider.of<OrderProvider>(context, listen: false).orderTypeIndex == 2) {
+                        } else if (Provider.of<OrderProvider>(context,
+                                    listen: false)
+                                .orderTypeIndex ==
+                            2) {
                           orderList = order.canceledList;
                         }
                         return Expanded(
                           child: RefreshIndicator(
                             backgroundColor: Theme.of(context).primaryColor,
                             onRefresh: () async {
-                              await Provider.of<OrderProvider>(context, listen: false).initOrderList(context);
+                              await Provider.of<OrderProvider>(context,
+                                      listen: false)
+                                  .initOrderList(context);
                             },
                             child: ListView.builder(
                               itemCount: orderList.length,
                               padding: EdgeInsets.all(0),
-                              itemBuilder: (context, index) => OrderWidget(orderModel: orderList[index]),
+                              itemBuilder: (context, index) =>
+                                  OrderWidget(orderModel: orderList[index]),
                             ),
                           ),
                         );
@@ -122,9 +146,11 @@ class OrderShimmer extends StatelessWidget {
                           SizedBox(height: 10),
                           Row(
                             children: [
-                              Container(height: 10, width: 70, color: Colors.white),
+                              Container(
+                                  height: 10, width: 70, color: Colors.white),
                               SizedBox(width: 10),
-                              Container(height: 10, width: 20, color: Colors.white),
+                              Container(
+                                  height: 10, width: 20, color: Colors.white),
                             ],
                           ),
                         ],
@@ -146,24 +172,34 @@ class OrderTypeButton extends StatelessWidget {
   final int index;
   final List<OrderModel> orderList;
 
-  OrderTypeButton({@required this.text, @required this.index, @required this.orderList});
+  OrderTypeButton(
+      {@required this.text, @required this.index, @required this.orderList});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextButton(
-        onPressed: () => Provider.of<OrderProvider>(context, listen: false).setIndex(index),
+        onPressed: () =>
+            Provider.of<OrderProvider>(context, listen: false).setIndex(index),
         style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
         child: Container(
           height: 40,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Provider.of<OrderProvider>(context, listen: false).orderTypeIndex == index ? ColorResources.getPrimary(context) : Theme.of(context).highlightColor,
+            color: Provider.of<OrderProvider>(context, listen: false)
+                        .orderTypeIndex ==
+                    index
+                ? ColorResources.getPrimary(context)
+                : Theme.of(context).highlightColor,
             borderRadius: BorderRadius.circular(6),
           ),
           child: Text(text + '(${orderList.length})',
-              style: titilliumBold.copyWith(color: Provider.of<OrderProvider>(context, listen: false).orderTypeIndex == index
-                  ? Theme.of(context).highlightColor : ColorResources.getPrimary(context))),
+              style: titilliumBold.copyWith(
+                  color: Provider.of<OrderProvider>(context, listen: false)
+                              .orderTypeIndex ==
+                          index
+                      ? Theme.of(context).highlightColor
+                      : ColorResources.getPrimary(context))),
         ),
       ),
     );

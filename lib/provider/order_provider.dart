@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/body/order_place_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/error_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/cart_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/order_details.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/order_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/shipping_method_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/order_repo.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/api_checker.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/model/body/order_place_model.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/data/model/response/base/error_response.dart';
+import 'package:swape_user_app/data/model/response/cart_model.dart';
+import 'package:swape_user_app/data/model/response/order_details.dart';
+import 'package:swape_user_app/data/model/response/order_model.dart';
+import 'package:swape_user_app/data/model/response/shipping_method_model.dart';
+import 'package:swape_user_app/data/repository/order_repo.dart';
+import 'package:swape_user_app/helper/api_checker.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 
 class OrderProvider with ChangeNotifier {
   final OrderRepo orderRepo;
@@ -23,9 +23,13 @@ class OrderProvider with ChangeNotifier {
   List<ShippingMethodModel> _shippingList;
   int _paymentMethodIndex = 0;
 
-  List<OrderModel> get pendingList => _pendingList != null ? _pendingList.reversed.toList() : _pendingList;
-  List<OrderModel> get deliveredList => _deliveredList != null ? _deliveredList.reversed.toList() : _deliveredList;
-  List<OrderModel> get canceledList => _canceledList != null ? _canceledList.reversed.toList() : _canceledList;
+  List<OrderModel> get pendingList =>
+      _pendingList != null ? _pendingList.reversed.toList() : _pendingList;
+  List<OrderModel> get deliveredList => _deliveredList != null
+      ? _deliveredList.reversed.toList()
+      : _deliveredList;
+  List<OrderModel> get canceledList =>
+      _canceledList != null ? _canceledList.reversed.toList() : _canceledList;
   int get addressIndex => _addressIndex;
   int get shippingIndex => _shippingIndex;
   bool get isLoading => _isLoading;
@@ -34,19 +38,24 @@ class OrderProvider with ChangeNotifier {
 
   Future<void> initOrderList(BuildContext context) async {
     ApiResponse apiResponse = await orderRepo.getOrderList();
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _pendingList = [];
       _deliveredList = [];
       _canceledList = [];
       apiResponse.response.data.forEach((order) {
         OrderModel orderModel = OrderModel.fromJson(order);
-        if (orderModel.orderStatus == AppConstants.PENDING || orderModel.orderStatus == AppConstants.CONFIRMED || orderModel.orderStatus ==AppConstants.OUT_FOR_DELIVERY
-            || orderModel.orderStatus == AppConstants.PROCESSING || orderModel.orderStatus == AppConstants.PROCESSED) {
+        if (orderModel.orderStatus == AppConstants.PENDING ||
+            orderModel.orderStatus == AppConstants.CONFIRMED ||
+            orderModel.orderStatus == AppConstants.OUT_FOR_DELIVERY ||
+            orderModel.orderStatus == AppConstants.PROCESSING ||
+            orderModel.orderStatus == AppConstants.PROCESSED) {
           _pendingList.add(orderModel);
         } else if (orderModel.orderStatus == AppConstants.DELIVERED) {
           _deliveredList.add(orderModel);
-        } else if (orderModel.orderStatus == AppConstants.CANCELLED || orderModel.orderStatus == AppConstants.FAILED
-            || orderModel.orderStatus == AppConstants.RETURNED) {
+        } else if (orderModel.orderStatus == AppConstants.CANCELLED ||
+            orderModel.orderStatus == AppConstants.FAILED ||
+            orderModel.orderStatus == AppConstants.RETURNED) {
           _canceledList.add(orderModel);
         }
       });
@@ -67,25 +76,31 @@ class OrderProvider with ChangeNotifier {
   List<OrderDetailsModel> _orderDetails;
   List<OrderDetailsModel> get orderDetails => _orderDetails;
 
-  void getOrderDetails(String orderID, BuildContext context, String languageCode) async {
+  void getOrderDetails(
+      String orderID, BuildContext context, String languageCode) async {
     _orderDetails = null;
     notifyListeners();
-    ApiResponse apiResponse = await orderRepo.getOrderDetails(orderID, languageCode);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    ApiResponse apiResponse =
+        await orderRepo.getOrderDetails(orderID, languageCode);
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _orderDetails = [];
-      apiResponse.response.data.forEach((order) => _orderDetails.add(OrderDetailsModel.fromJson(order)));
+      apiResponse.response.data.forEach(
+          (order) => _orderDetails.add(OrderDetailsModel.fromJson(order)));
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();
   }
 
-  Future<void> placeOrder(OrderPlaceModel orderPlaceModel, Function callback, List<CartModel> cartList, String addressID, String couponCode) async {
+  Future<void> placeOrder(OrderPlaceModel orderPlaceModel, Function callback,
+      List<CartModel> cartList, String addressID, String couponCode) async {
     _isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await orderRepo.placeOrder(addressID, couponCode);
     _isLoading = false;
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _addressIndex = null;
       String message = apiResponse.response.data.toString();
       callback(true, message, '', cartList);
@@ -119,9 +134,11 @@ class OrderProvider with ChangeNotifier {
     _shippingIndex = null;
     _addressIndex = null;
     ApiResponse apiResponse = await orderRepo.getShippingMethod(sellerID);
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _shippingList = [];
-      apiResponse.response.data.forEach((shippingMethod) => _shippingList.add(ShippingMethodModel.fromJson(shippingMethod)));
+      apiResponse.response.data.forEach((shippingMethod) =>
+          _shippingList.add(ShippingMethodModel.fromJson(shippingMethod)));
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -136,21 +153,23 @@ class OrderProvider with ChangeNotifier {
   OrderModel _trackingModel;
   OrderModel get trackingModel => _trackingModel;
 
-  Future<void> initTrackingInfo(String orderID, OrderModel orderModel, bool fromDetails, BuildContext context) async {
-    if(fromDetails) {
+  Future<void> initTrackingInfo(String orderID, OrderModel orderModel,
+      bool fromDetails, BuildContext context) async {
+    if (fromDetails) {
       _orderDetails = null;
     }
-    if(orderModel == null) {
+    if (orderModel == null) {
       _trackingModel = null;
       notifyListeners();
       ApiResponse apiResponse = await orderRepo.getTrackingInfo(orderID);
-      if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+      if (apiResponse.response != null &&
+          apiResponse.response.statusCode == 200) {
         _trackingModel = OrderModel.fromJson(apiResponse.response.data);
       } else {
         ApiChecker.checkApi(context, apiResponse);
       }
       notifyListeners();
-    }else {
+    } else {
       _trackingModel = orderModel;
     }
   }
@@ -159,5 +178,4 @@ class OrderProvider with ChangeNotifier {
     _paymentMethodIndex = index;
     notifyListeners();
   }
-
 }

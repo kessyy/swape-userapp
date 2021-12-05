@@ -1,6 +1,4 @@
-
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
-
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
 class CartModel {
   int _id;
@@ -27,11 +25,30 @@ class CartModel {
   List<ChoiceOptions> _choiceOptions;
   List<int> _variationIndexes;
 
-
   CartModel(
-      this._id, this._image, this._name, this._seller, this._price, this._discountedPrice, this._quantity, this._maxQuantity, this._variant, this._color,
-      this._variation, this._discount, this._discountType, this._tax, this._taxType, this.shippingMethodId, this._cartGroupId,this._sellerId, this._sellerIs,
-      this._thumbnail, this._shopInfo, this._choiceOptions, this._variationIndexes);
+      this._id,
+      this._image,
+      this._name,
+      this._seller,
+      this._price,
+      this._discountedPrice,
+      this._quantity,
+      this._maxQuantity,
+      this._variant,
+      this._color,
+      this._variation,
+      this._discount,
+      this._discountType,
+      this._tax,
+      this._taxType,
+      this.shippingMethodId,
+      this._cartGroupId,
+      this._sellerId,
+      this._sellerIs,
+      this._thumbnail,
+      this._shopInfo,
+      this._choiceOptions,
+      this._variationIndexes);
 
   String get variant => _variant;
   String get color => _color;
@@ -42,6 +59,7 @@ class CartModel {
   set quantity(int value) {
     _quantity = value;
   }
+
   int get maxQuantity => _maxQuantity;
   double get price => _price;
   double get discountedPrice => _discountedPrice;
@@ -75,7 +93,9 @@ class CartModel {
     _maxQuantity = json['max_quantity'];
     _variant = json['variant'];
     _color = json['color'];
-    _variation = json['variation'] != null ? Variation.fromJson(json['variation']) : null;
+    _variation = json['variation'] != null
+        ? Variation.fromJson(json['variation'])
+        : null;
     _discount = json['discount'].toDouble();
     _discountType = json['discount_type'];
     _tax = json['tax'].toDouble();
@@ -85,10 +105,13 @@ class CartModel {
     _shopInfo = json['shop_info'];
     if (json['choice_options'] != null) {
       _choiceOptions = [];
-      json['choice_options'].forEach((v) {_choiceOptions.add(new ChoiceOptions.fromJson(v));
+      json['choice_options'].forEach((v) {
+        _choiceOptions.add(new ChoiceOptions.fromJson(v));
       });
     }
-    _variationIndexes = json['variation_indexes'] != null ? json['variation_indexes'].cast<int>() : [];
+    _variationIndexes = json['variation_indexes'] != null
+        ? json['variation_indexes'].cast<int>()
+        : [];
   }
 
   Map<String, dynamic> toJson() {
@@ -115,7 +138,8 @@ class CartModel {
     data['seller_is'] = this._sellerIs;
     data['shop_info'] = this._shopInfo;
     if (this._choiceOptions != null) {
-      data['choice_options'] = this._choiceOptions.map((v) => v.toJson()).toList();
+      data['choice_options'] =
+          this._choiceOptions.map((v) => v.toJson()).toList();
     }
     data['variation_indexes'] = this._variationIndexes;
     return data;
@@ -123,7 +147,7 @@ class CartModel {
 }
 
 //
-// import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+// import 'package:swape_user_app/data/model/response/product_model.dart';
 // class CartModel {
 //   int id;
 //   int customerId;

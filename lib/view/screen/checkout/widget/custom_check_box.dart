@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/utils.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/utils.dart';
 import 'package:provider/provider.dart';
 
 class CustomCheckBox extends StatelessWidget {
@@ -21,9 +21,12 @@ class CustomCheckBox extends StatelessWidget {
               onChanged: (bool isChecked) => order.setPaymentMethod(index),
             ),
             Expanded(
-              child: Text(title, style: titilliumRegular.copyWith(
-                color: order.paymentMethodIndex == index ? Theme.of(context).textTheme.bodyText1.color : ColorResources.getGainsBoro(context),
-              )),
+              child: Text(title,
+                  style: titilliumRegular.copyWith(
+                    color: order.paymentMethodIndex == index
+                        ? Theme.of(context).textTheme.bodyText1.color
+                        : ColorResources.getGainsBoro(context),
+                  )),
             ),
           ]),
         );

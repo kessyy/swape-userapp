@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/coupon_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/coupon_repo.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/data/model/response/coupon_model.dart';
+import 'package:swape_user_app/data/repository/coupon_repo.dart';
 
 class CouponProvider extends ChangeNotifier {
   final CouponRepo couponRepo;
@@ -19,13 +19,16 @@ class CouponProvider extends ChangeNotifier {
     _discount = 0;
     notifyListeners();
     ApiResponse apiResponse = await couponRepo.getCoupon(coupon);
-    if (apiResponse.response != null && apiResponse.response.toString() != '{}' && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.toString() != '{}' &&
+        apiResponse.response.statusCode == 200) {
       _coupon = CouponModel.fromJson(apiResponse.response.data);
       if (_coupon.minPurchase != null && _coupon.minPurchase < order) {
-        if(_coupon.discountType == 'percent') {
+        if (_coupon.discountType == 'percent') {
           _discount = (_coupon.discount * order / 100) < _coupon.maxDiscount
-              ? (_coupon.discount * order / 100) : _coupon.maxDiscount;
-        }else {
+              ? (_coupon.discount * order / 100)
+              : _coupon.maxDiscount;
+        } else {
           _discount = _coupon.discount;
         }
       } else {

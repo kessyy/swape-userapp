@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/chat/inbox_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/localization_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/widget/fancy_bottom_nav_bar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/home_screen.dart';
-// import 'package:flutter_sixvalley_ecommerce/view/screen/home/menu.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/more/more_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/notification/notification_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
+import 'package:swape_user_app/helper/network_info.dart';
+import 'package:swape_user_app/view/screen/chat/inbox_screen.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/localization_provider.dart';
+import 'package:swape_user_app/utill/images.dart';
+import 'package:swape_user_app/view/screen/dashboard/widget/fancy_bottom_nav_bar.dart';
+import 'package:swape_user_app/view/screen/home/home_screen.dart';
+// import 'package:swape_user_app/view/screen/home/menu.dart';
+import 'package:swape_user_app/view/screen/more/more_screen.dart';
+import 'package:swape_user_app/view/screen/notification/notification_screen.dart';
+import 'package:swape_user_app/view/screen/order/order_screen.dart';
+import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
 import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatefulWidget {

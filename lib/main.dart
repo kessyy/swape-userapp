@@ -3,12 +3,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_details_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/providers.dart';
-import 'package:flutter_sixvalley_ecommerce/theme/dark_theme.dart';
-import 'package:flutter_sixvalley_ecommerce/theme/light_theme.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/splash/splash_screen.dart';
+import 'package:swape_user_app/view/screen/order/order_details_screen.dart';
+import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/theme/dark_theme.dart';
+import 'package:swape_user_app/theme/light_theme.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
+import 'package:swape_user_app/view/screen/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'di_container.dart' as di;

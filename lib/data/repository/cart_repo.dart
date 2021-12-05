@@ -1,35 +1,32 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/cart_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/data/model/response/cart_model.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CartRepo{
+class CartRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
   CartRepo({@required this.dioClient, @required this.sharedPreferences});
 
-
   List<CartModel> getCartList() {
-    List<String> carts = sharedPreferences.getStringList(AppConstants.CART_LIST);
+    List<String> carts =
+        sharedPreferences.getStringList(AppConstants.CART_LIST);
     List<CartModel> cartList = [];
-    carts.forEach((cart) => cartList.add(CartModel.fromJson(jsonDecode(cart))) );
+    carts.forEach((cart) => cartList.add(CartModel.fromJson(jsonDecode(cart))));
     return cartList;
   }
 
   void addToCartList(List<CartModel> cartProductList) {
     List<String> carts = [];
-    cartProductList.forEach((cartModel) => carts.add(jsonEncode(cartModel)) );
+    cartProductList.forEach((cartModel) => carts.add(jsonEncode(cartModel)));
     sharedPreferences.setStringList(AppConstants.CART_LIST, carts);
   }
-
-
 
   Future<ApiResponse> getCartListData() async {
     try {
@@ -39,21 +36,28 @@ class CartRepo{
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-  Future<ApiResponse> addToCartListData(CartModel cart, List<ChoiceOptions> choiceOptions, List<int> variationIndexes) async {
+
+  Future<ApiResponse> addToCartListData(CartModel cart,
+      List<ChoiceOptions> choiceOptions, List<int> variationIndexes) async {
     Map<String, dynamic> _choice = Map();
     int _i = 0;
-    if(cart.variant.isNotEmpty) {
+    if (cart.variant.isNotEmpty) {
       _choice.addAll({'choice_0': cart.variant});
       _i = 1;
     }
-    for(int index=0; index<choiceOptions.length; index++){
-      _choice.addAll({'choice_${index+_i}': choiceOptions[index].options[variationIndexes[index]]});
+    for (int index = 0; index < choiceOptions.length; index++) {
+      _choice.addAll({
+        'choice_${index + _i}':
+            choiceOptions[index].options[variationIndexes[index]]
+      });
     }
-    Map<String, dynamic> _data = {'id': cart.id,
+    Map<String, dynamic> _data = {
+      'id': cart.id,
       'variant': cart.variation != null ? cart.variation.type : null,
-      'quantity': cart.quantity};
+      'quantity': cart.quantity
+    };
     _data.addAll(_choice);
-    if(cart.variant.isNotEmpty) {
+    if (cart.variant.isNotEmpty) {
       _data.addAll({'color': cart.color});
     }
     print(_data);
@@ -67,16 +71,19 @@ class CartRepo{
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-  Future<ApiResponse> updateQuantity( int key,int quantity) async {
+
+  Future<ApiResponse> updateQuantity(int key, int quantity) async {
     print('Body: ${{'_method': 'put', 'key': key, 'quantity': quantity}}');
     try {
-      final response = await dioClient.post(AppConstants.UPDATE_CART_QUANTITY_URI,
-        data: {'_method': 'put', 'key': key, 'quantity': quantity});
+      final response = await dioClient.post(
+          AppConstants.UPDATE_CART_QUANTITY_URI,
+          data: {'_method': 'put', 'key': key, 'quantity': quantity});
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
   Future<ApiResponse> removeFromCart(int key) async {
     try {
       final response = await dioClient.post(AppConstants.REMOVE_FROM_CART_URI,
@@ -86,10 +93,14 @@ class CartRepo{
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
   Future<ApiResponse> getShippingMethod(int sellerId) async {
     try {
-      final response = sellerId==1?await dioClient.get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/admin'):
-      await dioClient.get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/seller');
+      final response = sellerId == 1
+          ? await dioClient
+              .get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/admin')
+          : await dioClient
+              .get('${AppConstants.GET_SHIPPING_METHOD}/$sellerId/seller');
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -97,23 +108,23 @@ class CartRepo{
   }
 
   Future<ApiResponse> addShippingMethod(int id, String cartGroupId) async {
-    print('===>${{"id":id, "cart_group_id": cartGroupId}}');
+    print('===>${{"id": id, "cart_group_id": cartGroupId}}');
     try {
-      final response = await dioClient.post(AppConstants.CHOOSE_SHIPPING_METHOD, data: {"id":id, "cart_group_id": cartGroupId});
+      final response = await dioClient.post(AppConstants.CHOOSE_SHIPPING_METHOD,
+          data: {"id": id, "cart_group_id": cartGroupId});
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
   Future<ApiResponse> getChosenShippingMethod() async {
     try {
-      final response =await dioClient.get(AppConstants.CHOSEN_SHIPPING_METHOD_URI);
+      final response =
+          await dioClient.get(AppConstants.CHOSEN_SHIPPING_METHOD_URI);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
-
-
 }

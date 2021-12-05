@@ -1,4 +1,4 @@
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
 class HomeCategoryProduct {
   int id;
@@ -15,16 +15,16 @@ class HomeCategoryProduct {
 
   HomeCategoryProduct(
       {this.id,
-        this.name,
-        this.slug,
-        this.icon,
-        this.parentId,
-        this.position,
-        this.createdAt,
-        this.updatedAt,
-        this.homeStatus,
-        this.products,
-        this.translations});
+      this.name,
+      this.slug,
+      this.icon,
+      this.parentId,
+      this.position,
+      this.createdAt,
+      this.updatedAt,
+      this.homeStatus,
+      this.products,
+      this.translations});
 
   HomeCategoryProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -38,14 +38,15 @@ class HomeCategoryProduct {
     homeStatus = json['home_status'];
     if (json['products'] != null) {
       products = [];
-      json['products'].forEach((v) { products.add(new Product.fromJson(v)); });
+      json['products'].forEach((v) {
+        products.add(new Product.fromJson(v));
+      });
     }
 
     if (json['translations'] != null) {
       translations = [];
       translations = List<dynamic>.from(translations.map((x) => x));
     }
-
   }
 
   Map<String, dynamic> toJson() {

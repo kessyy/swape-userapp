@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/localization_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/seller_view.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+import 'package:swape_user_app/provider/auth_provider.dart';
+import 'package:swape_user_app/provider/localization_provider.dart';
+import 'package:swape_user_app/view/screen/product/widget/seller_view.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/product_details_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/wishlist_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/no_internet_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/bottom_cart_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/product_image_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/product_specification_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/product_title_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/related_product_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/review_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/widget/product_variation.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/product_details_provider.dart';
+import 'package:swape_user_app/provider/product_provider.dart';
+import 'package:swape_user_app/provider/theme_provider.dart';
+import 'package:swape_user_app/provider/wishlist_provider.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/view/basewidget/no_internet_screen.dart';
+import 'package:swape_user_app/view/basewidget/title_row.dart';
+import 'package:swape_user_app/view/screen/product/widget/bottom_cart_view.dart';
+import 'package:swape_user_app/view/screen/product/widget/product_image_view.dart';
+import 'package:swape_user_app/view/screen/product/widget/product_specification_view.dart';
+import 'package:swape_user_app/view/screen/product/widget/product_title_view.dart';
+import 'package:swape_user_app/view/screen/product/widget/related_product_view.dart';
+import 'package:swape_user_app/view/screen/product/widget/review_widget.dart';
+import 'package:swape_user_app/view/screen/product/widget/product_variation.dart';
 import 'package:provider/provider.dart';
 
 import 'faq_and_review_screen.dart';
@@ -31,79 +31,105 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProductDetailsProvider>(context, listen: false).removePrevReview();
-    Provider.of<ProductDetailsProvider>(context, listen: false).initProduct(product, context);
-    Provider.of<ProductProvider>(context, listen: false).removePrevRelatedProduct();
+    Provider.of<ProductDetailsProvider>(context, listen: false)
+        .removePrevReview();
+    Provider.of<ProductDetailsProvider>(context, listen: false)
+        .initProduct(product, context);
+    Provider.of<ProductProvider>(context, listen: false)
+        .removePrevRelatedProduct();
     Provider.of<ProductProvider>(context, listen: false).initRelatedProductList(
-      product.id.toString(), context, Provider.of<LocalizationProvider>(context, listen: false).locale.languageCode,
+      product.id.toString(),
+      context,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
     );
-    Provider.of<ProductDetailsProvider>(context, listen: false).getCount(product.id.toString(), context);
-    Provider.of<ProductDetailsProvider>(context, listen: false).getSharableLink(product.id.toString(), context);
-    if(Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-      Provider.of<WishListProvider>(context, listen: false).checkWishList(product.id.toString(), context);
+    Provider.of<ProductDetailsProvider>(context, listen: false)
+        .getCount(product.id.toString(), context);
+    Provider.of<ProductDetailsProvider>(context, listen: false)
+        .getSharableLink(product.id.toString(), context);
+    if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+      Provider.of<WishListProvider>(context, listen: false)
+          .checkWishList(product.id.toString(), context);
     }
 
     return Consumer<ProductDetailsProvider>(
       builder: (context, details, child) {
-        return details.hasConnection ? Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: Row(children: [
-              InkWell(
-                child: Icon(Icons.arrow_back_ios, color: Theme.of(context).textTheme.bodyText1.color, size: 20),
-                onTap: () => Navigator.pop(context),
-              ),
-              SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-              Text(getTranslated('product_details', context), style: robotoRegular.copyWith(fontSize: 20, color: Theme.of(context).textTheme.bodyText1.color)),
-            ]),
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : Colors.white.withOpacity(0.5),
-          
-          ),
+        return details.hasConnection
+            ? Scaffold(
+                backgroundColor: Colors.white,
+                appBar: AppBar(
+                  title: Row(children: [
+                    InkWell(
+                      child: Icon(Icons.arrow_back_ios,
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                          size: 20),
+                      onTap: () => Navigator.pop(context),
+                    ),
+                    SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                    Text(getTranslated('product_details', context),
+                        style: robotoRegular.copyWith(
+                            fontSize: 20,
+                            color:
+                                Theme.of(context).textTheme.bodyText1.color)),
+                  ]),
+                  automaticallyImplyLeading: false,
+                  elevation: 0,
+                  backgroundColor: Provider.of<ThemeProvider>(context).darkTheme
+                      ? Colors.black
+                      : Colors.white.withOpacity(0.5),
+                ),
+                bottomNavigationBar: BottomCartView(product: product),
+                body: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ProductImageView(productModel: product),
 
-          bottomNavigationBar: BottomCartView(product: product),
+                      ProductTitleView(productModel: product),
 
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-
-                ProductImageView(productModel: product),
-
-                ProductTitleView(productModel: product),
-
-                // Coupon
-                /*Container(
+                      // Coupon
+                      /*Container(
                   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   color: ColorResources.WHITE,
                   child: CouponView(),
                 ),*/
 
-                // color variation
-                (product.details != null && product.details.isNotEmpty) ? Container(
-                  margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: ProductVariation(product: product),
-                ) : SizedBox.shrink(),
+                      // color variation
+                      (product.details != null && product.details.isNotEmpty)
+                          ? Container(
+                              margin: EdgeInsets.only(
+                                  top: Dimensions.PADDING_SIZE_SMALL),
+                              padding:
+                                  EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                              color: Theme.of(context).highlightColor,
+                              child: ProductVariation(product: product),
+                            )
+                          : SizedBox.shrink(),
 
-                // Seller
-               
-                product.addedBy == 'seller' ? SellerView(sellerId: product.userId.toString()) : SizedBox.shrink(),
+                      // Seller
 
-                // Specification
-                (product.details != null && product.details.isNotEmpty) ? Container(
-                  margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: ProductSpecification(productSpecification: product.details ?? ''),
-                ) : SizedBox(),
+                      product.addedBy == 'seller'
+                          ? SellerView(sellerId: product.userId.toString())
+                          : SizedBox.shrink(),
 
-                // Product variant
-                /*Container(
+                      // Specification
+                      (product.details != null && product.details.isNotEmpty)
+                          ? Container(
+                              margin: EdgeInsets.only(
+                                  top: Dimensions.PADDING_SIZE_SMALL),
+                              padding:
+                                  EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                              color: Theme.of(context).highlightColor,
+                              child: ProductSpecification(
+                                  productSpecification: product.details ?? ''),
+                            )
+                          : SizedBox(),
+
+                      // Product variant
+                      /*Container(
                   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   color: ColorResources.WHITE,
@@ -137,44 +163,65 @@ class ProductDetails extends StatelessWidget {
                   ),
                 ),*/
 
+                      // Reviews
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        color: Theme.of(context).highlightColor,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TitleRow(
+                                  title: getTranslated('reviews', context) +
+                                      '(${details.reviewList != null ? details.reviewList.length : 0})',
+                                  isDetailsPage: true,
+                                  onTap: () {
+                                    if (details.reviewList != null) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => ReviewScreen(
+                                                  reviewList:
+                                                      details.reviewList)));
+                                    }
+                                  }),
+                              Divider(),
+                              details.reviewList != null
+                                  ? details.reviewList.length != 0
+                                      ? ReviewWidget(
+                                          reviewModel: details.reviewList[0])
+                                      : Center(child: Text('No Review'))
+                                  : ReviewShimmer(),
+                            ]),
+                      ),
 
-                // Reviews
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    TitleRow(title: getTranslated('reviews', context)+'(${details.reviewList != null ? details.reviewList.length : 0})', isDetailsPage: true, onTap: () {
-                      if(details.reviewList != null) {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => ReviewScreen(reviewList: details.reviewList)));
-                      }
-                    }),
-                    Divider(),
-                    details.reviewList != null ? details.reviewList.length != 0 ? ReviewWidget(reviewModel: details.reviewList[0])
-                        : Center(child: Text('No Review')) : ReviewShimmer(),
-                  ]),
-                ),
-
-                // Related Products
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: Column(
-                    children: [
-                      TitleRow(title: getTranslated('related_products', context), isDetailsPage: true),
-                      SizedBox(height: 5),
-                      RelatedProductView(),
+                      // Related Products
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        color: Theme.of(context).highlightColor,
+                        child: Column(
+                          children: [
+                            TitleRow(
+                                title:
+                                    getTranslated('related_products', context),
+                                isDetailsPage: true),
+                            SizedBox(height: 5),
+                            RelatedProductView(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-
-              ],
-            ),
-          ),
-        ) : Scaffold(body: NoInternetOrDataScreen(isNoInternet: true, child: ProductDetails(product: product)));
+              )
+            : Scaffold(
+                body: NoInternetOrDataScreen(
+                    isNoInternet: true,
+                    child: ProductDetails(product: product)));
       },
     );
   }
 }
-

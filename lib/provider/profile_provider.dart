@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/address_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/error_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/response_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/user_info_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/profile_repo.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/api_checker.dart';
+import 'package:swape_user_app/data/model/response/address_model.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/data/model/response/base/error_response.dart';
+import 'package:swape_user_app/data/model/response/response_model.dart';
+import 'package:swape_user_app/data/model/response/user_info_model.dart';
+import 'package:swape_user_app/data/repository/profile_repo.dart';
+import 'package:swape_user_app/helper/api_checker.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileProvider extends ChangeNotifier {
@@ -43,11 +43,11 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _checkHomeAddress=false;
-  bool get checkHomeAddress=>_checkHomeAddress;
+  bool _checkHomeAddress = false;
+  bool get checkHomeAddress => _checkHomeAddress;
 
-  bool _checkOfficeAddress=false;
-  bool get checkOfficeAddress=>_checkOfficeAddress;
+  bool _checkOfficeAddress = false;
+  bool get checkOfficeAddress => _checkOfficeAddress;
 
   void setHomeAddress() {
     _checkHomeAddress = true;
@@ -61,7 +61,6 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   updateCountryCode(String value) {
     _addressType = value;
     notifyListeners();
@@ -69,9 +68,11 @@ class ProfileProvider extends ChangeNotifier {
 
   Future<void> initAddressList(BuildContext context) async {
     ApiResponse apiResponse = await profileRepo.getAllAddress();
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _addressList = [];
-      apiResponse.response.data.forEach((address) => _addressList.add(AddressModel.fromJson(address)));
+      apiResponse.response.data.forEach(
+          (address) => _addressList.add(AddressModel.fromJson(address)));
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -84,11 +85,13 @@ class ProfileProvider extends ChangeNotifier {
     ApiResponse apiResponse = await profileRepo.removeAddressByID(id);
     _isLoading = false;
 
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _addressList.removeAt(index);
       Map map = apiResponse.response.data;
       String message = map["message"];
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.green));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message), backgroundColor: Colors.green));
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -98,7 +101,8 @@ class ProfileProvider extends ChangeNotifier {
   Future<String> getUserInfo(BuildContext context) async {
     String userID = '-1';
     ApiResponse apiResponse = await profileRepo.getUserInfo();
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       _userInfoModel = UserInfoModel.fromJson(apiResponse.response.data);
       userID = _userInfoModel.id.toString();
     } else {
@@ -111,7 +115,8 @@ class ProfileProvider extends ChangeNotifier {
   void initAddressTypeList(BuildContext context) async {
     if (_addressTypeList.length == 0) {
       ApiResponse apiResponse = await profileRepo.getAddressTypeList();
-      if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+      if (apiResponse.response != null &&
+          apiResponse.response.statusCode == 200) {
         _addressTypeList.clear();
         _addressTypeList.addAll(apiResponse.response.data);
         _addressType = apiResponse.response.data[0];
@@ -129,9 +134,10 @@ class ProfileProvider extends ChangeNotifier {
     ApiResponse apiResponse = await profileRepo.addAddress(addressModel);
     _isLoading = false;
 
-    if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
       Map map = apiResponse.response.data;
-      if(_addressList == null) {
+      if (_addressList == null) {
         _addressList = [];
       }
       _addressList.add(addressModel);
@@ -152,12 +158,14 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ResponseModel> updateUserInfo(UserInfoModel updateUserModel, String pass, File file, String token) async {
+  Future<ResponseModel> updateUserInfo(UserInfoModel updateUserModel,
+      String pass, File file, String token) async {
     _isLoading = true;
     notifyListeners();
 
     ResponseModel responseModel;
-    http.StreamedResponse response = await profileRepo.updateProfile(updateUserModel, pass, file, token);
+    http.StreamedResponse response =
+        await profileRepo.updateProfile(updateUserModel, pass, file, token);
     _isLoading = false;
     if (response.statusCode == 200) {
       Map map = jsonDecode(await response.stream.bytesToString());
@@ -167,7 +175,8 @@ class ProfileProvider extends ChangeNotifier {
       print(message);
     } else {
       print('${response.statusCode} ${response.reasonPhrase}');
-      responseModel = ResponseModel('${response.statusCode} ${response.reasonPhrase}', false);
+      responseModel = ResponseModel(
+          '${response.statusCode} ${response.reasonPhrase}', false);
     }
     notifyListeners();
     return responseModel;

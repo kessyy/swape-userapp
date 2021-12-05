@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/product_type.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/helper/product_type.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 
 class ProductRepo {
   final DioClient dioClient;
   ProductRepo({@required this.dioClient});
 
-  Future<ApiResponse> getLatestProductList(String offset, String languageCode, ProductType productType, String title) async {
+  Future<ApiResponse> getLatestProductList(String offset, String languageCode,
+      ProductType productType, String title) async {
     String endUrl;
     // if(productType == ProductType.LATEST_PRODUCT){
     //   endUrl = AppConstants.LATEST_PRODUCTS_URI;
@@ -20,22 +21,20 @@ class ProductRepo {
     //   endUrl = AppConstants.FEATURED_PRODUCTS_URI;
     //   title = 'Featured Product';
     // }
-     if(productType == ProductType.BEST_SELLING){
+    if (productType == ProductType.BEST_SELLING) {
       endUrl = AppConstants.BEST_SELLING_PRODUCTS_URI;
       title = 'Best Selling Product';
-    }
-    else if(productType == ProductType.NEW_ARRIVAL){
+    } else if (productType == ProductType.NEW_ARRIVAL) {
       endUrl = AppConstants.NEW_ARRIVAL_PRODUCTS_URI;
       title = 'New Arrival Product';
-    }
-    else if(productType == ProductType.TOP_PRODUCT){
+    } else if (productType == ProductType.TOP_PRODUCT) {
       endUrl = AppConstants.TOP_PRODUCTS_URI;
       title = 'Top Product';
     }
 
     try {
       final response = await dioClient.get(
-        endUrl+offset,
+        endUrl + offset,
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -45,10 +44,14 @@ class ProductRepo {
   }
 
   //Seller Products
-  Future<ApiResponse> getSellerProductList(String sellerId, String offset, String languageCode) async {
+  Future<ApiResponse> getSellerProductList(
+      String sellerId, String offset, String languageCode) async {
     try {
       final response = await dioClient.get(
-        AppConstants.SELLER_PRODUCT_URI+sellerId+'/products?limit=10&&offset='+offset,
+        AppConstants.SELLER_PRODUCT_URI +
+            sellerId +
+            '/products?limit=10&&offset=' +
+            offset,
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -57,39 +60,28 @@ class ProductRepo {
     }
   }
 
-  Future<ApiResponse> getBrandOrCategoryProductList(bool isBrand, String id, String languageCode) async {
+  Future<ApiResponse> getBrandOrCategoryProductList(
+      bool isBrand, String id, String languageCode) async {
     try {
       String uri;
-      if(isBrand){
+      if (isBrand) {
         uri = '${AppConstants.BRAND_PRODUCT_URI}$id';
-      }else {
+      } else {
         uri = '${AppConstants.CATEGORY_PRODUCT_URI}$id';
       }
-      final response = await dioClient.get(uri, options: Options(headers: {AppConstants.LANG_KEY: languageCode}));
+      final response = await dioClient.get(uri,
+          options: Options(headers: {AppConstants.LANG_KEY: languageCode}));
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
 
-
-
-  Future<ApiResponse> getRelatedProductList(String id, String languageCode) async {
+  Future<ApiResponse> getRelatedProductList(
+      String id, String languageCode) async {
     try {
       final response = await dioClient.get(
-        AppConstants.RELATED_PRODUCT_URI+id, options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
-      );
-      return ApiResponse.withSuccess(response);
-    } catch (e) {
-      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
-    }
-  }
-
-
-  Future<ApiResponse> getFeaturedProductList(String offset, String languageCode) async {
-    try {
-      final response = await dioClient.get(
-        AppConstants.FEATURED_PRODUCTS_URI+offset,
+        AppConstants.RELATED_PRODUCT_URI + id,
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -97,10 +89,25 @@ class ProductRepo {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-  Future<ApiResponse> getLProductList(String offset, String languageCode) async {
+
+  Future<ApiResponse> getFeaturedProductList(
+      String offset, String languageCode) async {
     try {
       final response = await dioClient.get(
-        AppConstants.LATEST_PRODUCTS_URI+offset,
+        AppConstants.FEATURED_PRODUCTS_URI + offset,
+        options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> getLProductList(
+      String offset, String languageCode) async {
+    try {
+      final response = await dioClient.get(
+        AppConstants.LATEST_PRODUCTS_URI + offset,
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);

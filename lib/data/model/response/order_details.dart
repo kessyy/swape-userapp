@@ -1,4 +1,4 @@
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
+import 'package:swape_user_app/data/model/response/product_model.dart';
 
 class OrderDetailsModel {
   int _id;
@@ -18,24 +18,24 @@ class OrderDetailsModel {
   String _variant;
   //List<Variation> _variation;
 
-  OrderDetailsModel(
-      {int id,
-        int orderId,
-        int productId,
-        int sellerId,
-        Product productDetails,
-        int qty,
-        double price,
-        double tax,
-        double discount,
-        String deliveryStatus,
-        String paymentStatus,
-        String createdAt,
-        String updatedAt,
-        int shippingMethodId,
-        String variant,
-        //List<Variation> variation
-      }) {
+  OrderDetailsModel({
+    int id,
+    int orderId,
+    int productId,
+    int sellerId,
+    Product productDetails,
+    int qty,
+    double price,
+    double tax,
+    double discount,
+    String deliveryStatus,
+    String paymentStatus,
+    String createdAt,
+    String updatedAt,
+    int shippingMethodId,
+    String variant,
+    //List<Variation> variation
+  }) {
     this._id = id;
     this._orderId = orderId;
     this._productId = productId;
@@ -76,7 +76,7 @@ class OrderDetailsModel {
     _orderId = json['order_id'];
     _productId = json['product_id'];
     _sellerId = json['seller_id'];
-    if(json['product_details'] != null) {
+    if (json['product_details'] != null) {
       _productDetails = Product.fromJson(json['product_details']);
     }
     _qty = json['qty'];
@@ -103,7 +103,7 @@ class OrderDetailsModel {
     data['order_id'] = this._orderId;
     data['product_id'] = this._productId;
     data['seller_id'] = this._sellerId;
-    if(this._productDetails != null) {
+    if (this._productDetails != null) {
       data['product_details'] = this._productDetails.toJson();
     }
     data['qty'] = this._qty;

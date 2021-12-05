@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_sixvalley_ecommerce/helper/product_type.dart';
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/featured_deal_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/flash_deal_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/home_category_product_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/localization_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_single.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view_kids.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_view.dart';
+import 'package:swape_user_app/helper/product_type.dart';
+import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/auth_provider.dart';
+import 'package:swape_user_app/provider/banner_provider.dart';
+import 'package:swape_user_app/provider/brand_provider.dart';
+import 'package:swape_user_app/provider/cart_provider.dart';
+import 'package:swape_user_app/provider/category_provider.dart';
+import 'package:swape_user_app/provider/featured_deal_provider.dart';
+import 'package:swape_user_app/provider/flash_deal_provider.dart';
+import 'package:swape_user_app/provider/home_category_product_provider.dart';
+import 'package:swape_user_app/provider/localization_provider.dart';
+import 'package:swape_user_app/provider/product_provider.dart';
+import 'package:swape_user_app/provider/top_seller_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/title_row.dart';
+import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
+import 'package:swape_user_app/view/screen/home/widget/banners_single.dart';
+import 'package:swape_user_app/view/screen/home/widget/category_view_kids.dart';
+import 'package:swape_user_app/view/screen/home/widget/products_view.dart';
 import 'package:provider/provider.dart';
 
 class KidsScreen extends StatefulWidget {

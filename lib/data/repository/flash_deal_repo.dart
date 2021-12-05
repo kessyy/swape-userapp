@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
-import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
+import 'package:swape_user_app/data/datasource/remote/dio/dio_client.dart';
+import 'package:swape_user_app/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:swape_user_app/data/model/response/base/api_response.dart';
+import 'package:swape_user_app/utill/app_constants.dart';
 
 class FlashDealRepo {
   final DioClient dioClient;
@@ -11,7 +11,8 @@ class FlashDealRepo {
 
   Future<ApiResponse> getFlashDeal(String languageCode) async {
     try {
-      final response = await dioClient.get(AppConstants.FLASH_DEAL_URI,
+      final response = await dioClient.get(
+        AppConstants.FLASH_DEAL_URI,
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -20,9 +21,11 @@ class FlashDealRepo {
     }
   }
 
-  Future<ApiResponse> getFlashDealList(String productID, String languageCode) async {
+  Future<ApiResponse> getFlashDealList(
+      String productID, String languageCode) async {
     try {
-      final response = await dioClient.get('${AppConstants.FLASH_DEAL_PRODUCT_URI}$productID',
+      final response = await dioClient.get(
+        '${AppConstants.FLASH_DEAL_PRODUCT_URI}$productID',
         options: Options(headers: {AppConstants.LANG_KEY: languageCode}),
       );
       return ApiResponse.withSuccess(response);
