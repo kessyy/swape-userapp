@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:swape_user_app/view/screen/home/Men.dart';
-import 'package:swape_user_app/view/screen/home/women.dart';
-import 'package:swape_user_app/view/screen/home/kids.dart';
+import 'package:swape_user_app/view/screen/home/category1.dart';
+import 'package:swape_user_app/view/screen/home/category2.dart';
+import 'package:swape_user_app/view/screen/home/category4.dart';
 import 'package:swape_user_app/view/screen/home/home_screen.dart';
 
 import 'package:flutter/rendering.dart';
@@ -56,7 +56,7 @@ class Categories extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => WomenScreen()));
+                      MaterialPageRoute(builder: (_) => Category2Screen()));
                   color:
                   Colors.white;
                 },
@@ -75,8 +75,8 @@ class Categories extends StatelessWidget {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MenScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => Category1Screen()));
                 },
               ),
               InkWell(
@@ -93,8 +93,8 @@ class Categories extends StatelessWidget {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => KidsScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => Category4Screen()));
                 },
               ),
               InkWell(
@@ -112,8 +112,8 @@ class Categories extends StatelessWidget {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => KidsScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => Category4Screen()));
                 },
               ),
             ],

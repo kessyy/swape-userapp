@@ -67,11 +67,15 @@ class LatestProductView extends StatelessWidget {
                   : SizedBox.shrink()
               : ProductShimmer(
                   isHomePage: true, isEnabled: prodProvider.firstLoading),
-
-          // prodProvider.isLoading ? Center(child: Padding(
-          //   padding: EdgeInsets.all(Dimensions.ICON_SIZE_EXTRA_SMALL),
-          //   child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
-          // )) : SizedBox.shrink(),
+          // prodProvider.isLoading
+          //     ? Center(
+          //         child: Padding(
+          //         padding: EdgeInsets.all(Dimensions.ICON_SIZE_EXTRA_SMALL),
+          //         child: CircularProgressIndicator(
+          //             valueColor: AlwaysStoppedAnimation<Color>(
+          //                 Theme.of(context).primaryColor)),
+          //       ))
+          //     : SizedBox.shrink(),
         ]);
       },
     );

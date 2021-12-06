@@ -4,18 +4,19 @@ import 'package:swape_user_app/data/model/response/category.dart';
 import 'package:swape_user_app/provider/category_provider.dart';
 import 'package:swape_user_app/utill/custom_themes.dart';
 import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/screen/home/category1.dart';
 import 'package:swape_user_app/view/screen/home/home_screen.dart';
-import 'package:swape_user_app/view/screen/home/women.dart';
-import 'package:swape_user_app/view/screen/home/men.dart';
-import 'package:swape_user_app/view/screen/home/kids.dart';
+import 'package:swape_user_app/view/screen/home/category2.dart';
+// import 'package:swape_user_app/view/screen/home/men.dart';
+import 'package:swape_user_app/view/screen/home/category4.dart';
 import 'package:provider/provider.dart';
 
-class TabNavigatorRoutes {
-  static const String root = '/';
-  static const String men = '/MenScreen()';
-  static const String women = '/WomenScreen()';
-  static const String kid = '/KidsScreen()';
-}
+// class TabNavigatorRoutes {
+//   static const String root = '/';
+//   static const String men = '/MenScreen()';
+//   static const String women = '/WomenScreen()';
+//   static const String kid = '/KidsScreen()';
+// }
 
 const double BAR_WIDTH = double.infinity;
 
@@ -49,22 +50,22 @@ class NewMenuScreen extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => MenScreen()));
+                                          builder: (_) => Category1Screen()));
                                 } else if (index == 1) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => WomenScreen()));
+                                          builder: (_) => Category2Screen()));
                                 } else if (index == 2) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => WomenScreen()));
+                                          builder: (_) => Category1Screen()));
                                 } else if (index == 3) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => KidsScreen()));
+                                          builder: (_) => Category4Screen()));
                                 }
                                 Provider.of<CategoryProvider>(context,
                                         listen: false)

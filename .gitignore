@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.lib/view/screen/home/widget/category_view_women.dart
 
 # IntelliJ related
 *.iml
@@ -33,6 +34,7 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
+lib/view/screen/home/widget/category_view_women.dart
 
 # Symbolication related
 app.*.symbols

@@ -8,12 +8,14 @@ import 'package:swape_user_app/utill/dimensions.dart';
 import 'package:swape_user_app/utill/images.dart';
 import 'package:swape_user_app/view/screen/home/AllScreen.dart';
 import 'package:swape_user_app/view/screen/cart/cart_screen.dart';
-import 'package:swape_user_app/view/screen/home/Men.dart';
+import 'package:swape_user_app/view/screen/home/category1.dart';
 import 'package:swape_user_app/view/screen/chat/inbox_screen.dart';
-import 'package:swape_user_app/view/screen/home/interior_design.dart';
-import 'package:swape_user_app/view/screen/home/kids.dart';
+import 'package:swape_user_app/view/screen/home/category3.dart';
+import 'package:swape_user_app/view/screen/home/category4.dart';
+import 'package:swape_user_app/view/screen/home/category5.dart';
+import 'package:swape_user_app/view/screen/home/category6.dart';
 import 'package:swape_user_app/view/screen/search/search_screen.dart';
-import 'package:swape_user_app/view/screen/home/women.dart';
+import 'package:swape_user_app/view/screen/home/category2.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
 
@@ -166,12 +168,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
         body: TabBarView(
           children: <Widget>[
             AllScreen(),
-            MenScreen(),
-            WomenScreen(),
-            InteriorDesignScreen(),
-            KidsScreen(),
-            KidsScreen(),
-            KidsScreen(),
+            Category1Screen(),
+            Category2Screen(),
+            Category3Screen(),
+            Category4Screen(),
+            Category5Screen(),
+            // Category6Screen(),
+            // KidsScreen(),
+            // KidsScreen(),
+            // KidsScreen(),
+            // KidsScreen(),
+            // KidsScreen(),
           ],
         ),
       )),
