@@ -306,13 +306,13 @@ class TabItem extends StatelessWidget {
                 child: IconButton(
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
-                  padding: EdgeInsets.all(0),
+                  padding: EdgeInsets.all(5),
                   alignment: Alignment(0, 0),
                   icon: Image.asset(
                     imagePath,
                     color: Colors.black,
-                    width: 20,
-                    height: 20,
+                    width: 40,
+                    height: 24,
                   ),
                   onPressed: () {
                     callbackFunction(uniqueKey);

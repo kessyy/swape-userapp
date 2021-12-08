@@ -76,9 +76,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       myTabs.add(Tab(
         child: Text(
           categories[i].name,
-          // style: titilliumSemiBold.copyWith(
-          //   fontSize: Dimensions.FONT_SIZE_LARGE,
-          // ),
         ),
       ));
     }
@@ -109,8 +106,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   },
                   icon: Image.asset(
                     Images.message_image,
-                    height: Dimensions.ICON_SIZE_DEFAULT,
-                    width: Dimensions.ICON_SIZE_DEFAULT,
+                    height: Dimensions.ICON_SIZE_LARGE,
+                    width: Dimensions.ICON_SIZE_LARGE,
                     color: ColorResources.getPrimary(context),
                   ),
                 );
@@ -136,8 +133,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   icon: Stack(clipBehavior: Clip.none, children: [
                     Image.asset(
                       Images.cart_arrow_down_image,
-                      height: Dimensions.ICON_SIZE_LARGE,
-                      width: Dimensions.ICON_SIZE_LARGE,
+                      height: Dimensions.ICON_SIZE_DEFAULT,
+                      width: Dimensions.ICON_SIZE_DEFAULT,
                       color: ColorResources.getPrimary(context),
                     ),
                     Positioned(
