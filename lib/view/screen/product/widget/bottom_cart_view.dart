@@ -44,7 +44,7 @@ class BottomCartView extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => CartScreen()));
                     },
-                    child: Image.asset(Images.cart_image,
+                    child: Image.asset(Images.cart_arrow_down_image,
                         color: ColorResources.getPrimary(context))),
                 Positioned(
                   top: 0,

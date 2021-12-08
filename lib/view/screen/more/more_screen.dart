@@ -57,7 +57,7 @@ class MoreScreen extends StatelessWidget {
 
         // AppBar
         Positioned(
-          top: 40,
+          top: 50,
           left: Dimensions.PADDING_SIZE_SMALL,
           right: Dimensions.PADDING_SIZE_SMALL,
           child: Consumer<ProfileProvider>(
