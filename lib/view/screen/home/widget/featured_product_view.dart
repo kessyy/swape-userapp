@@ -67,7 +67,7 @@ class FeaturedProductView extends StatelessWidget {
                                 return Container(
                                     width: (MediaQuery.of(context).size.width /
                                             2) -
-                                        20,
+                                        35,
                                     child: ProductWidget(
                                         productModel: productList[index]));
                               })

@@ -34,8 +34,8 @@ class CategoryView2 extends StatelessWidget {
                                     categoryProvider.categorySelectedIndex]
                                 .subCategories
                                 .length >
-                            6
-                        ? 6
+                            8
+                        ? 8
                         : categoryProvider
                             .categoryList[
                                 categoryProvider.categorySelectedIndex]
@@ -55,7 +55,8 @@ class CategoryView2 extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (_) => BrandAndCategoryProductScreen(
                                   isBrand: false,
-                                  id: categoryProvider.categoryList[1].id
+                                  id: categoryProvider
+                                      .categoryList[1].subCategories[index]
                                       .toString(),
                                   name: categoryProvider.categoryList[1]
                                       .subCategories[index].name)));
@@ -175,7 +176,7 @@ class CategoryShimmer extends StatelessWidget {
                         bottomRight: Radius.circular(10)),
                   ),
                   child: Shimmer.fromColors(
-                    baseColor: Color(0xFFFCE4EC),
+                    baseColor: Colors.grey[300],
                     highlightColor: Colors.grey[100],
                     enabled: Provider.of<CategoryProvider>(context)
                             .categoryList

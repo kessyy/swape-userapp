@@ -14,6 +14,9 @@ import 'package:swape_user_app/view/screen/home/category3.dart';
 import 'package:swape_user_app/view/screen/home/category4.dart';
 import 'package:swape_user_app/view/screen/home/category5.dart';
 import 'package:swape_user_app/view/screen/home/category6.dart';
+import 'package:swape_user_app/view/screen/home/category7.dart';
+import 'package:swape_user_app/view/screen/home/category8.dart';
+import 'package:swape_user_app/view/screen/home/category9.dart';
 import 'package:swape_user_app/view/screen/search/search_screen.dart';
 import 'package:swape_user_app/view/screen/home/category2.dart';
 import 'package:provider/provider.dart';
@@ -28,21 +31,26 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+  List<Widget> _generalWidgets = [
+    AllScreen(),
+    Category1Screen(),
+    Category2Screen(),
+    Category3Screen(),
+    Category4Screen(),
+    Category5Screen(),
+    Category6Screen(),
+    // Category7Screen(),
+    // Category8Screen(),
+    // Category9Screen(),
+  ];
+  TabController _tabController;
+
   @override
   void initState() {
     Provider.of<CategoryProvider>(context, listen: false)
         .getCategoryList(false, context, 'en');
     super.initState();
   }
-
-  // HomePageScreen({Key key, this.isHomePage}) : super(key: key);
-  // final List<Tab> myTabs = <Tab>[
-  //   Tab(text: 'ALL'),
-  //   Tab(text: 'MEN'),
-  //   Tab(text: 'WOMEN'),
-  //   Tab(text: 'INTERIOR DESIGN'),
-  //   Tab(text: 'KIDS'),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -161,25 +169,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   fontSize: Dimensions.FONT_SIZE_LARGE,
                 ),
                 tabs: myTabs,
+                controller: _tabController,
               ),
             ),
           ];
         },
         body: TabBarView(
-          children: <Widget>[
-            AllScreen(),
-            Category1Screen(),
-            Category2Screen(),
-            Category3Screen(),
-            Category4Screen(),
-            Category5Screen(),
-            // Category6Screen(),
-            // KidsScreen(),
-            // KidsScreen(),
-            // KidsScreen(),
-            // KidsScreen(),
-            // KidsScreen(),
-          ],
+          controller: _tabController,
+          children: _generalWidgets,
         ),
       )),
     );

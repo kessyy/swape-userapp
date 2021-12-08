@@ -10,6 +10,8 @@ import 'package:swape_user_app/view/screen/product/brand_and_category_product_sc
 import 'package:provider/provider.dart';
 
 class AllCategoryScreen extends StatelessWidget {
+  get subCategories => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

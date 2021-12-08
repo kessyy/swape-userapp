@@ -55,7 +55,10 @@ class CategoryViewMen extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (_) => BrandAndCategoryProductScreen(
                                   isBrand: false,
-                                  id: categoryProvider.categoryList[0].id
+                                  // id: categoryProvider.categoryList[0].id
+                                  //     .toString(),
+                                  id: categoryProvider
+                                      .categoryList[0].subCategories
                                       .toString(),
                                   name: categoryProvider.categoryList[0]
                                       .subCategories[index].name)));
@@ -95,7 +98,6 @@ class CategoryViewMen extends StatelessWidget {
                                     Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: ClipRRect(
                                   child: FadeInImage.assetNetwork(
-                                    // placeholder: Images.placeholder,
                                     // image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.categoryImageUrl}'
                                     //     '/${categoryProvider.categoryList[index].icon}',
                                     // imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder),

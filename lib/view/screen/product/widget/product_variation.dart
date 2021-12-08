@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:swape_user_app/data/model/response/cart_model.dart';
 import 'package:swape_user_app/data/model/response/product_model.dart';
-// import 'package:swape_user_app/helper/price_converter.dart';
-// import 'package:swape_user_app/localization/language_constrants.dart';
-// import 'package:swape_user_app/provider/auth_provider.dart';
-// import 'package:swape_user_app/provider/cart_provider.dart';
 import 'package:swape_user_app/provider/product_details_provider.dart';
-// import 'package:swape_user_app/provider/seller_provider.dart';
-// import 'package:swape_user_app/provider/splash_provider.dart';
 import 'package:swape_user_app/provider/theme_provider.dart';
 import 'package:swape_user_app/utill/color_resources.dart';
 import 'package:swape_user_app/utill/custom_themes.dart';
@@ -26,8 +19,7 @@ class ProductVariation extends StatefulWidget {
 class _ProductVariationState extends State<ProductVariation> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProductDetailsProvider>(context, listen: false)
-        .initData(widget.product);
+    Provider.of<ThemeProvider>(context, listen: false);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -175,16 +167,6 @@ class _ProductVariationState extends State<ProductVariation> {
                       },
                     ),
                     SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
-                    // Row(children: [
-                    //   Text(getTranslated('total_price', context), style: robotoBold),
-                    //   SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-                    //   Text(
-                    //     PriceConverter.convertPrice(context, priceWithQuantity),
-                    //     style: titilliumBold.copyWith(color: ColorResources.getPrimary(context), fontSize: 16),
-                    //   ),
-                    // ]),
-                    // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                   ]);
             },
           ),
