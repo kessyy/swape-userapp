@@ -26,8 +26,6 @@ class CategoryView2 extends StatelessWidget {
                   crossAxisCount: 2,
                   childAspectRatio: (1.3 / 0.5),
                 ),
-                // itemCount: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].subCategories.length+1,
-
                 itemCount: isHomePage
                     ? categoryProvider
                                 .categoryList[
@@ -56,7 +54,7 @@ class CategoryView2 extends StatelessWidget {
                               builder: (_) => BrandAndCategoryProductScreen(
                                   isBrand: false,
                                   id: categoryProvider
-                                      .categoryList[1].subCategories[index]
+                                      .categoryList[1].subCategories[index].id
                                       .toString(),
                                   name: categoryProvider.categoryList[1]
                                       .subCategories[index].name)));
@@ -103,7 +101,8 @@ class CategoryView2 extends StatelessWidget {
                                     placeholder: Images.placeholder,
                                     fit: BoxFit.cover,
                                     image:
-                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.subcategoryImageUrl}',
+                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.subcategoryImageUrl}'
+                                        '/${categoryProvider.categoryList[1].subCategories[index].icon}',
                                     imageErrorBuilder: (c, o, s) => Image.asset(
                                         Images.placeholder,
                                         fit: BoxFit.cover),

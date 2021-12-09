@@ -55,7 +55,8 @@ class CategoryView8 extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (_) => BrandAndCategoryProductScreen(
                                   isBrand: false,
-                                  id: categoryProvider.categoryList[8].id
+                                  id: categoryProvider
+                                      .categoryList[8].subCategories[index].id
                                       .toString(),
                                   name: categoryProvider.categoryList[8]
                                       .subCategories[index].name)));
@@ -95,18 +96,14 @@ class CategoryView8 extends StatelessWidget {
                                     Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: ClipRRect(
                                   child: FadeInImage.assetNetwork(
-                                    // placeholder: Images.placeholder,
-                                    // image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.categoryImageUrl}'
-                                    //     '/${categoryProvider.categoryList[index].icon}',
-                                    // imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder),
                                     placeholder: Images.placeholder,
                                     fit: BoxFit.cover,
                                     image:
-                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.subcategoryImageUrl}',
+                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.subcategoryImageUrl}'
+                                        '/${categoryProvider.categoryList[8].subCategories[index].icon}',
                                     imageErrorBuilder: (c, o, s) => Image.asset(
                                         Images.placeholder,
                                         fit: BoxFit.cover),
-
                                     height: 10,
                                   ),
                                 ),
