@@ -12,9 +12,9 @@ import 'package:swape_user_app/view/screen/product/brand_and_category_product_sc
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CategoryView8 extends StatelessWidget {
+class CategoryView9 extends StatelessWidget {
   final bool isHomePage;
-  CategoryView8({@required this.isHomePage});
+  CategoryView9({@required this.isHomePage});
 
   @override
   Widget build(BuildContext context) {

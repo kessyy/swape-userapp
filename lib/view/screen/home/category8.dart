@@ -127,7 +127,7 @@ class _Category8ScreenState extends State<Category8Screen> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_SMALL),
-                      child: CategoryView8(isHomePage: true),
+                      child: CategoryView9(isHomePage: true),
                     ),
 
                     Padding(
