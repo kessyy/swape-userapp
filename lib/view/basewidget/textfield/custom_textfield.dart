@@ -36,7 +36,8 @@ class CustomTextField extends StatelessWidget {
       this.isValidator = false,
       this.validatorMessage,
       this.capitalization = TextCapitalization.none,
-      this.fillColor});
+      this.fillColor,
+      bool isDense});
 
   @override
   Widget build(context) {

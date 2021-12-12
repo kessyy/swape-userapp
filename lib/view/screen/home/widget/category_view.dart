@@ -51,14 +51,7 @@ class CategoryView extends StatelessWidget {
                       margin: EdgeInsets.all(6),
                       height: 20,
                       decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL),
                         color: Color(0xffF8F8F8),
-                        // boxShadow: [BoxShadow(
-                        //   color: Colors.grey.withOpacity(0.3),
-                        //   spreadRadius: 1,
-                        //   blurRadius: 3,
-                        //   offset: Offset(0, 3), // changes position of shadow
-                        // )],
                       ),
                       child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,10 +59,7 @@ class CategoryView extends StatelessWidget {
                             Expanded(
                                 flex: 5,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      // color: ColorResources.getTextBg(context),
-                                      // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-                                      ),
+                                  decoration: BoxDecoration(),
                                   child: Center(
                                     child: Text(
                                       categoryProvider.categoryList.length != 0

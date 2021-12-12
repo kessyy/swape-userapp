@@ -28,27 +28,25 @@ class AllProductScreen extends StatelessWidget {
     // _loadData(context, false);
 
     return Scaffold(
-      backgroundColor: ColorResources.getHomeBg(context),
+      backgroundColor: ColorResources.WHITE,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme
-            ? Colors.black
-            : Theme.of(context).primaryColor,
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(5),
                 bottomLeft: Radius.circular(5))),
         leading: IconButton(
           icon:
-              Icon(Icons.arrow_back_ios, size: 20, color: ColorResources.WHITE),
+              Icon(Icons.arrow_back_ios, size: 20, color: ColorResources.BLACK),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
             productType == ProductType.FEATURED_PRODUCT
-                ? 'Featured Product'
-                : 'Latest Product',
+                ? 'Featured Products'
+                : 'Latest Products',
             style: titilliumRegular.copyWith(
-                fontSize: 20, color: ColorResources.WHITE)),
+                fontSize: 20, color: ColorResources.BLACK)),
       ),
       body: SafeArea(
         child: RefreshIndicator(

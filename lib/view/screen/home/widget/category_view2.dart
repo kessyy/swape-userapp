@@ -27,22 +27,10 @@ class CategoryView2 extends StatelessWidget {
                   childAspectRatio: (1.3 / 0.5),
                 ),
                 itemCount: isHomePage
-                    ? categoryProvider
-                                .categoryList[
-                                    categoryProvider.categorySelectedIndex]
-                                .subCategories
-                                .length >
-                            8
-                        ? 8
-                        : categoryProvider
-                            .categoryList[
-                                categoryProvider.categorySelectedIndex]
-                            .subCategories
-                            .length
-                    : categoryProvider
-                        .categoryList[categoryProvider.categorySelectedIndex]
-                        .subCategories
-                        .length,
+                    ? categoryProvider.categoryList[1].subCategories.length > 10
+                        ? 10
+                        : categoryProvider.categoryList[1].subCategories.length
+                    : categoryProvider.categoryList[1].subCategories.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {

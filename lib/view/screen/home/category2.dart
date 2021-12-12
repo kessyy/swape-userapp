@@ -16,7 +16,6 @@ import 'package:swape_user_app/provider/top_seller_provider.dart';
 import 'package:swape_user_app/utill/color_resources.dart';
 import 'package:swape_user_app/utill/custom_themes.dart';
 import 'package:swape_user_app/utill/dimensions.dart';
-import 'package:swape_user_app/utill/images.dart';
 import 'package:swape_user_app/view/basewidget/title_row.dart';
 import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
 import 'package:swape_user_app/view/screen/home/widget/banners_single.dart';
@@ -202,7 +201,7 @@ class _Category2ScreenState extends State<Category2Screen> {
                                     );
                                     Provider.of<ProductProvider>(context,
                                             listen: false)
-                                        .getLatestProductList('1', context, '',
+                                        .getLatestProductList('0', context, '',
                                             reload: true);
                                   })
                               : SizedBox(),

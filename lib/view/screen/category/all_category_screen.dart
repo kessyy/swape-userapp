@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:swape_user_app/data/model/response/category.dart';
 
 import 'package:swape_user_app/localization/language_constrants.dart';
+import 'package:swape_user_app/provider/splash_provider.dart';
+import 'package:swape_user_app/provider/theme_provider.dart';
+import 'package:swape_user_app/utill/color_resources.dart';
+import 'package:swape_user_app/utill/custom_themes.dart';
 import 'package:swape_user_app/provider/providers.dart';
+import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/utill/images.dart';
 import 'package:swape_user_app/utill/utils.dart';
 import 'package:swape_user_app/view/basewidget/custom_app_bar.dart';
 import 'package:swape_user_app/view/screen/product/brand_and_category_product_screen.dart';
@@ -17,7 +23,10 @@ class AllCategoryScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          CustomAppBar(title: ('Categories')),
+          CustomAppBar(
+            title: ('Categories'),
+            isBackButtonExist: false,
+          ),
           Expanded(child: Consumer<CategoryProvider>(
             builder: (context, categoryProvider, child) {
               return categoryProvider.categoryList.length != 0

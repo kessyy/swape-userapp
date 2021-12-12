@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 class ProductWidget extends StatelessWidget {
   final Product productModel;
-  ProductWidget({@required this.productModel});
+  ProductWidget({@required this.productModel, CategoryIds child});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class ProductWidget extends StatelessWidget {
                 // Product Image
                 Container(
                   height: 170,
-                  width: 90,
+                  width: 70,
                   decoration: BoxDecoration(
                     color: Color(0xff000000),
                   ),
@@ -58,7 +58,7 @@ class ProductWidget extends StatelessWidget {
 
                 // Product Details
                 Padding(
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                  padding: EdgeInsets.all(0),
                   child: Container(
                     height: 25,
                     width: 90,

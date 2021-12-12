@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:swape_user_app/helper/product_type.dart';
 import 'package:swape_user_app/localization/language_constrants.dart';
@@ -17,6 +18,9 @@ import 'package:swape_user_app/utill/color_resources.dart';
 import 'package:swape_user_app/utill/custom_themes.dart';
 import 'package:swape_user_app/utill/dimensions.dart';
 import 'package:swape_user_app/utill/images.dart';
+import 'package:swape_user_app/view/basewidget/no_internet_screen.dart';
+import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
+import 'package:swape_user_app/view/basewidget/product_widget.dart';
 import 'package:swape_user_app/view/basewidget/title_row.dart';
 import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
 import 'package:swape_user_app/view/screen/home/widget/banners_single.dart';
@@ -130,7 +134,7 @@ class _Category1ScreenState extends State<Category1Screen> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_SMALL),
-                      child: CategoryViewMen(isHomePage: true),
+                      child: CategoryView1(isHomePage: true),
                     ),
 
                     Padding(

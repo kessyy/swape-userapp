@@ -73,8 +73,8 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                     .configModel
                     .socialLogin[1]
                     .status
-                ? Center(child: Text(getTranslated('social_login', context)))
-                : Center(child: Text(getTranslated('social_login', context)))
+                ? Center(child: Text('OR'))
+                : Center(child: Text('OR'))
             : SizedBox(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -119,8 +119,7 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                       color: Color(0xFF397AF3),
                       child: Padding(
                         padding: EdgeInsets.all(6),
-                        child: Card(
-                          // color: Color(0xFF397AF3),
+                        child: Container(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
@@ -191,7 +190,7 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                       color: Color(0xFF397AF3),
                       child: Padding(
                         padding: EdgeInsets.all(6),
-                        child: Card(
+                        child: Container(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
