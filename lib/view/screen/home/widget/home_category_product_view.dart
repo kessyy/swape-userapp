@@ -83,7 +83,9 @@ class HomeCategoryProductView extends StatelessWidget {
                                             ProductDetails(
                                                 product:
                                                     homeCategoryProductProvider
-                                                        .productList[i]),
+                                                        .homeCategoryProductList[
+                                                            index]
+                                                        .products[0]),
                                       ));
                                 },
                                 child: Container(
@@ -93,7 +95,8 @@ class HomeCategoryProductView extends StatelessWidget {
                                     child: ProductWidget(
                                         productModel:
                                             homeCategoryProductProvider
-                                                .productList[i])),
+                                                .homeCategoryProductList[index]
+                                                .products[index])),
                               );
                             }),
                       )

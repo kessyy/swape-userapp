@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:swape_user_app/helper/product_type.dart';
 import 'package:swape_user_app/localization/language_constrants.dart';
@@ -16,6 +17,9 @@ import 'package:swape_user_app/provider/top_seller_provider.dart';
 import 'package:swape_user_app/utill/color_resources.dart';
 import 'package:swape_user_app/utill/custom_themes.dart';
 import 'package:swape_user_app/utill/dimensions.dart';
+import 'package:swape_user_app/view/basewidget/no_internet_screen.dart';
+import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
+import 'package:swape_user_app/view/basewidget/product_widget.dart';
 import 'package:swape_user_app/view/basewidget/title_row.dart';
 import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
 import 'package:swape_user_app/view/screen/home/widget/banners_single.dart';
@@ -129,92 +133,59 @@ class _Category9ScreenState extends State<Category9Screen> {
                           horizontal: Dimensions.PADDING_SIZE_SMALL),
                       child: CategoryView10(isHomePage: true),
                     ),
-
+                    //category products
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(30, 15, 0, 5),
+                      child: TitleRow(
+                        title: '#categoryDrops',
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(20, 15, 0, 5),
-                      child: Consumer<ProductProvider>(
-                          builder: (ctx, prodProvider, child) {
-                        return Row(children: [
-                          Expanded(
-                              child: Text(prodProvider.title,
-                                  style: robotoBold.copyWith(
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT))),
-                          prodProvider.latestProductList != null
-                              ? PopupMenuButton(
-                                  itemBuilder: (context) {
-                                    return [
-                                      PopupMenuItem(
-                                          value: ProductType.NEW_ARRIVAL,
-                                          child: Text('New Arrival'),
-                                          textStyle: robotoRegular.copyWith(
-                                            color: Colors.black,
-                                          )),
-                                      PopupMenuItem(
-                                          value: ProductType.TOP_PRODUCT,
-                                          child: Text('Top Rated'),
-                                          textStyle: robotoRegular.copyWith(
-                                            color: Colors.black,
-                                          )),
-                                      PopupMenuItem(
-                                          value: ProductType.BEST_SELLING,
-                                          child: Text('Best Selling'),
-                                          textStyle: robotoRegular.copyWith(
-                                            color: Colors.black,
-                                          )),
-                                    ];
+                      child: Consumer<HomeCategoryProductProvider>(
+                        builder: (ctx, homeCategoryProductProvider, child) {
+                          return homeCategoryProductProvider
+                                      .homeCategoryProductList.length !=
+                                  0
+                              ? StaggeredGridView.countBuilder(
+                                  crossAxisCount: 3,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_SMALL),
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: homeCategoryProductProvider
+                                      .homeCategoryProductList[8]
+                                      .products
+                                      .length,
+                                  shrinkWrap: true,
+                                  staggeredTileBuilder: (int index) =>
+                                      StaggeredTile.fit(1),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return ProductWidget(
+                                        productModel:
+                                            homeCategoryProductProvider
+                                                .homeCategoryProductList[8]
+                                                .products[index]);
                                   },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.PADDING_SIZE_SMALL)),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            Dimensions.PADDING_SIZE_SMALL),
-                                    child: Icon(Icons.filter_list),
-                                  ),
-                                  onSelected: (value) {
-                                    if (value == ProductType.NEW_ARRIVAL) {
-                                      Provider.of<ProductProvider>(context,
-                                              listen: false)
-                                          .changeTypeOfProduct(value, types[0]);
-                                    } else if (value ==
-                                        ProductType.TOP_PRODUCT) {
-                                      Provider.of<ProductProvider>(context,
-                                              listen: false)
-                                          .changeTypeOfProduct(value, types[1]);
-                                    } else if (value ==
-                                        ProductType.BEST_SELLING) {
-                                      Provider.of<ProductProvider>(context,
-                                              listen: false)
-                                          .changeTypeOfProduct(value, types[2]);
-                                    }
-
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              Dimensions.PADDING_SIZE_SMALL),
-                                      child: ProductView(
-                                          isHomePage: false,
-                                          productType: value,
-                                          scrollController: _scrollController),
-                                    );
-                                    Provider.of<ProductProvider>(context,
-                                            listen: false)
-                                        .getLatestProductList('1', context, '',
-                                            reload: true);
-                                  })
-                              : SizedBox(),
-                        ]);
-                      }),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Dimensions.PADDING_SIZE_SMALL),
-                      child: ProductView(
-                          isHomePage: false,
-                          productType: ProductType.NEW_ARRIVAL,
-                          scrollController: _scrollController),
+                                )
+                              : Expanded(
+                                  child: Center(
+                                  child: homeCategoryProductProvider
+                                          .hasListeners
+                                      ? ProductShimmer(
+                                          isHomePage: true,
+                                          isEnabled:
+                                              Provider.of<HomeCategoryProductProvider>(
+                                                          context)
+                                                      .homeCategoryProductList
+                                                      .length ==
+                                                  0)
+                                      : NoInternetOrDataScreen(
+                                          isNoInternet: false),
+                                ));
+                        },
+                      ),
                     ),
                   ],
                 ),

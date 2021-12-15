@@ -12,6 +12,8 @@ import 'package:swape_user_app/provider/flash_deal_provider.dart';
 import 'package:swape_user_app/provider/providers.dart';
 import 'package:swape_user_app/utill/utils.dart';
 import 'package:swape_user_app/view/basewidget/title_row.dart';
+import 'package:swape_user_app/view/screen/featureddeal/featured_deal_screen.dart';
+import 'package:swape_user_app/view/screen/home/widget/featured_deal_view.dart';
 import 'package:swape_user_app/view/screen/home/widget/home_category_product_view.dart';
 import 'package:swape_user_app/view/screen/screens.dart';
 import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
@@ -260,23 +262,72 @@ class _AllState extends State<AllScreen> {
                     ),
 
                     // Featured Deal
-                    // Consumer<FeaturedDealProvider>(
-                    //   builder: (context, featuredDealProvider, child) {
-                    //     return featuredDealProvider.featuredDealList == null
-                    //         ? Padding(padding: EdgeInsets.fromLTRB(Dimensions.PADDING_SIZE_SMALL, 20, Dimensions.PADDING_SIZE_SMALL, Dimensions.PADDING_SIZE_SMALL),
-                    //       child: TitleRow(title: getTranslated('featured_deals', context),
-                    //           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FeaturedDealScreen()));}),) :
-                    //     (featuredDealProvider.featuredDealList != null && featuredDealProvider.featuredDealList.length > 0) ?
-                    //     Padding(padding: EdgeInsets.fromLTRB(Dimensions.PADDING_SIZE_SMALL, 20, Dimensions.PADDING_SIZE_SMALL, Dimensions.PADDING_SIZE_SMALL),
-                    //       child: TitleRow(title: getTranslated('featured_deals', context),
-                    //           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FeaturedDealScreen()));}),) : SizedBox.shrink();},),
+                    Consumer<FeaturedDealProvider>(
+                      builder: (context, featuredDealProvider, child) {
+                        return featuredDealProvider.featuredDealList == null
+                            ? Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    Dimensions.PADDING_SIZE_SMALL,
+                                    20,
+                                    Dimensions.PADDING_SIZE_SMALL,
+                                    Dimensions.PADDING_SIZE_SMALL),
+                                child: TitleRow(
+                                    title: getTranslated(
+                                        'featured_deals', context),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  FeaturedDealScreen()));
+                                    }),
+                              )
+                            : (featuredDealProvider.featuredDealList != null &&
+                                    featuredDealProvider
+                                            .featuredDealList.length >
+                                        0)
+                                ? Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        Dimensions.PADDING_SIZE_SMALL,
+                                        20,
+                                        Dimensions.PADDING_SIZE_SMALL,
+                                        Dimensions.PADDING_SIZE_SMALL),
+                                    child: TitleRow(
+                                        title: getTranslated(
+                                            'featured_deals', context),
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      FeaturedDealScreen()));
+                                        }),
+                                  )
+                                : SizedBox.shrink();
+                      },
+                    ),
                     // Consumer<FeaturedDealProvider>(
                     //   builder: (context, featuredDeal, child) {
-                    //     return featuredDeal.featuredDealList == null ? Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                    //       child: Container(height: 150, child: FeaturedDealsView()),) : (featuredDeal.featuredDealList != null && featuredDeal.featuredDealList.length > 0) ?
-                    //     Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                    //       child: Container(height: 150,
-                    //           child: FeaturedDealsView()),) : SizedBox.shrink();},),
+                    //     return featuredDeal.featuredDealList == null
+                    //         ? Padding(
+                    //             padding: EdgeInsets.symmetric(
+                    //                 horizontal: Dimensions.PADDING_SIZE_SMALL),
+                    //             child: Container(
+                    //                 height: 150, child: FeaturedDealsView()),
+                    //           )
+                    //         : (featuredDeal.featuredDealList != null &&
+                    //                 featuredDeal.featuredDealList.length > 0)
+                    //             ? Padding(
+                    //                 padding: EdgeInsets.symmetric(
+                    //                     horizontal:
+                    //                         Dimensions.PADDING_SIZE_SMALL),
+                    //                 child: Container(
+                    //                     height: 150,
+                    //                     child: FeaturedDealsView()),
+                    //               )
+                    //             : SizedBox.shrink();
+                    //   },
+                    // ),
 
                     // top seller
                     Padding(
