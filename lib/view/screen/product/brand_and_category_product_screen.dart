@@ -92,8 +92,12 @@ class BrandAndCategoryProductScreen extends StatelessWidget {
                           itemCount:
                               productProvider.brandOrCategoryProductList.length,
                           shrinkWrap: true,
-                          staggeredTileBuilder: (int index) =>
-                              StaggeredTile.fit(1),
+                          // staggeredTileBuilder: (int index) =>
+                          //     StaggeredTile.fit(1),
+                          staggeredTileBuilder: (index) {
+                            return StaggeredTile.count(
+                                1, index.isEven ? 1.39 : 1.42);
+                          },
                           itemBuilder: (BuildContext context, int index) {
                             return ProductWidget(
                                 productModel: productProvider

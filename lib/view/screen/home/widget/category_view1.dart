@@ -55,8 +55,6 @@ class CategoryView1 extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (_) => BrandAndCategoryProductScreen(
                                   isBrand: false,
-                                  // id: categoryProvider.categoryList[0].id
-                                  //     .toString(),
                                   id: categoryProvider
                                       .categoryList[0].subCategories[index].id
                                       .toString(),

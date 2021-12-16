@@ -346,7 +346,7 @@ class AllItems extends StatelessWidget {
             height: 70,
             width: 50,
             child: ClipRRect(
-              child: Image.asset(Images.placeholder, fit: BoxFit.cover),
+              child: Image.asset(Images.all_image, fit: BoxFit.cover),
             ),
           ),
           Padding(
