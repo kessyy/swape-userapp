@@ -3,8 +3,8 @@ import 'package:swape_user_app/data/model/response/product_model.dart';
 import 'package:swape_user_app/provider/localization_provider.dart';
 import 'package:swape_user_app/provider/product_provider.dart';
 import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
-import 'package:swape_user_app/view/basewidget/product_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:swape_user_app/view/basewidget/product_widget2.dart';
 
 class LatestProductView extends StatelessWidget {
   final ScrollController scrollController;
@@ -52,7 +52,7 @@ class LatestProductView extends StatelessWidget {
           !prodProvider.firstLoading
               ? productList.length != 0
                   ? Container(
-                      height: 235,
+                      height: 200,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: productList.length,
@@ -60,8 +60,8 @@ class LatestProductView extends StatelessWidget {
                             return Container(
                                 width: (MediaQuery.of(context).size.width / 2) -
                                     35,
-                                child: ProductWidget(
-                                    productModel: productList[index]));
+                                child: FeaturedProductWidget(
+                                    featuredProductModel: productList[index]));
                           }),
                     )
                   : SizedBox.shrink()

@@ -20,6 +20,7 @@ import 'package:swape_user_app/utill/dimensions.dart';
 import 'package:swape_user_app/view/basewidget/no_internet_screen.dart';
 import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
 import 'package:swape_user_app/view/basewidget/product_widget.dart';
+import 'package:swape_user_app/view/basewidget/product_widget2.dart';
 import 'package:swape_user_app/view/basewidget/title_row.dart';
 import 'package:swape_user_app/view/screen/category/all_category_screen.dart';
 import 'package:swape_user_app/view/screen/home/widget/banners_single.dart';
@@ -163,8 +164,8 @@ class _Category5ScreenState extends State<Category5Screen> {
                                       StaggeredTile.fit(1),
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return ProductWidget(
-                                        productModel:
+                                    return FeaturedProductWidget(
+                                        featuredProductModel:
                                             homeCategoryProductProvider
                                                 .homeCategoryProductList[4]
                                                 .products[index]);

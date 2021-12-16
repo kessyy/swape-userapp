@@ -8,6 +8,7 @@ import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
 import 'package:swape_user_app/view/basewidget/product_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:swape_user_app/view/basewidget/product_widget2.dart';
 
 class ProductView extends StatelessWidget {
   final bool isHomePage;
@@ -93,7 +94,8 @@ class ProductView extends StatelessWidget {
                       shrinkWrap: true,
                       staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
                       itemBuilder: (BuildContext context, int index) {
-                        return ProductWidget(productModel: productList[index]);
+                        return FeaturedProductWidget(
+                            featuredProductModel: productList[index]);
                       },
                     )
                   : SizedBox.shrink()
