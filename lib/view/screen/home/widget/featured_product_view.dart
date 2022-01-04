@@ -6,7 +6,7 @@ import 'package:swape_user_app/utill/dimensions.dart';
 import 'package:swape_user_app/view/basewidget/product_shimmer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:swape_user_app/view/basewidget/product_widget2.dart';
+import 'package:swape_user_app/view/basewidget/product_widget3.dart';
 
 class FeaturedProductView extends StatelessWidget {
   final ScrollController scrollController;
@@ -68,7 +68,7 @@ class FeaturedProductView extends StatelessWidget {
                                     width: (MediaQuery.of(context).size.width /
                                             2) -
                                         35,
-                                    child: FeaturedProductWidget(
+                                    child: FeaturedProductWidget1(
                                         featuredProductModel:
                                             productList[index]));
                               })
@@ -81,7 +81,7 @@ class FeaturedProductView extends StatelessWidget {
                               staggeredTileBuilder: (int index) =>
                                   StaggeredTile.fit(1),
                               itemBuilder: (BuildContext context, int index) {
-                                return FeaturedProductWidget(
+                                return FeaturedProductWidget1(
                                     featuredProductModel: productList[index]);
                               },
                             ),
